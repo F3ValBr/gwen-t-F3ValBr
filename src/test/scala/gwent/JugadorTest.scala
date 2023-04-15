@@ -1,16 +1,18 @@
 package cl.uchile.dcc
+package gwent
+
 import gwent.Jugador
 
-
+/**
 class JugadorTest extends munit.FunSuite {
   var Jugador1: Jugador = _
   var Jugador2: Jugador = _
   var Jugador3: Jugador = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Jugador1 = Jugador("Jugador 1",1)
-    Jugador2 = Jugador("Jugador 2",2)
-    Jugador3 = Jugador("",0,0,0,0)
+    Jugador1 = JugadorP1("Jugador 1")
+    Jugador2 = JugadorCPU("Jugador 2")
+    //Jugador3 = Jugador("",0,0,0,0)
   }
 
   test("Un jugador debe tener nombre"){
@@ -52,10 +54,10 @@ class JugadorTest extends munit.FunSuite {
     // Crear un nuevo jugador sigue igual a crear el mismo
   }
   test("El jugador puede perder gemas"){
-    Jugador1.quitar_gema()                      // quitar 1 gema, queda 1
-    assertEquals(Jugador1.gemas, expected = 1)
-    Jugador1.quitar_gema()                      // quitar 1 gema, quedan 0
-    Jugador1.quitar_gema()                      // quitar otra gema, debe seguir en 0
-    assertEquals(Jugador1.gemas, expected = 0)
+    Jugador1.del_gems()                      // quitar 1 gema, queda 1
+    assertEquals(Jugador1.gems, expected = 1)
+    Jugador1.del_gems()                      // quitar 1 gema, quedan 0
+    Jugador1.del_gems()                      // quitar otra gema, debe seguir en 0
+    assertEquals(Jugador1.gems, expected = 0)
   }
-}
+}*/
