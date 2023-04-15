@@ -13,12 +13,12 @@ class JugadorP1Test extends FunSuite{
   override def beforeEach(context: BeforeEach): Unit = {
     JugadorTu = JugadorP1("Nombre generico")
     JugadorYo = JugadorP1("Nombre especial")
-    JugadorX = JugadorP1("X",0,0,0)
+    JugadorX = JugadorP1("X", 0, 0, 0)
   }
 
-  test("Un jugador tiene un nombre"){
-    assertEquals(JugadorTu.name, expected = "Nombre generico")  // Un jugador tiene un nombre dado
-    assert(!JugadorTu.name.equals(JugadorYo.name))              // Jugadores con nombres distintos
+  test("Un jugador tiene un nombre") {
+    assertEquals(JugadorTu.name, expected = "Nombre generico") // Un jugador tiene un nombre dado
+    assert(!JugadorTu.name.equals(JugadorYo.name)) // Jugadores con nombres distintos
   }
   test("El jugador tiene una cantidad de gemas") {
     assertEquals(JugadorTu.gems, expected = 2) // el jugador 1 tiene 3 gemas
