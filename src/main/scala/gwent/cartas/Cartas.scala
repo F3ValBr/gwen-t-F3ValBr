@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent
+package gwent.cartas
 
 /** Clase representando cartas
  *
@@ -47,3 +47,5 @@ class Cartas(val clasific: String) {
     }
   }*/
 }
+
+

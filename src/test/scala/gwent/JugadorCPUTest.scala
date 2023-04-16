@@ -1,6 +1,7 @@
 package cl.uchile.dcc
 package gwent
 
+import cl.uchile.dcc.gwent.jugadores.{JugadorCPU, JugadorP1}
 import munit.FunSuite
 
 class JugadorCPUTest extends FunSuite{

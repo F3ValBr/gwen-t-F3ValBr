@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package gwent
+package gwent.jugadores
+
+import gwent.jugadores.AbstractJugador
 
 import java.util.Objects
 

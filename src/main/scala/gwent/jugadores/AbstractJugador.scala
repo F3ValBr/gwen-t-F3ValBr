@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent
+package gwent.jugadores
 
 abstract class AbstractJugador(override val name: String,
                                var gems: Int,

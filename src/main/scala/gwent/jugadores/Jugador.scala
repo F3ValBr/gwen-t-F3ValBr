@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent
+package gwent.jugadores
 
 /** Clase jugador representa al jugador o jugadores en una partida de gwent
  *

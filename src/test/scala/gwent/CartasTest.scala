@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent
 
-import gwent.Cartas
+import cl.uchile.dcc.gwent.cartas.Cartas
 
 /** CartasTest es el testeo de la clase Cartas, de acuerdo a una serie de casos
  * 
