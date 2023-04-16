@@ -10,9 +10,9 @@ class JugadorP1Test extends FunSuite{
   var JugadorX: JugadorP1 = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    JugadorTu = JugadorP1("Nombre generico")
-    JugadorYo = JugadorP1("Nombre especial")
-    JugadorX = JugadorP1("X", 0, 0, 0)
+    JugadorTu = new JugadorP1("Nombre generico")
+    JugadorYo = new JugadorP1("Nombre especial")
+    JugadorX = new JugadorP1("X", 0, 0, 0)
   }
 
   test("Un jugador tiene un nombre") {

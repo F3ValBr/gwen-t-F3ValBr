@@ -4,11 +4,14 @@ package gwent.cartas
 import gwent.cartas.AbstractCartaUnidad
 import java.util.Objects
 
-private class CartaDistancia(_name: String, 
-                             _strength: Int, 
+class CartaDistancia(_name: String,
+                             _strength: Int,
                              _ability: Option[String])
   extends AbstractCartaUnidad(_name, _strength, _ability) with Equals {
 
+  def this(_name: String, _strength: Int) = {
+    this(_name, _strength, None)
+  }
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaDistancia]
 
   /// Documentation inherited from [[Equals]]

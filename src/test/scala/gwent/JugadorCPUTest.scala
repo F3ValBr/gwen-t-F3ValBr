@@ -10,9 +10,9 @@ class JugadorCPUTest extends FunSuite{
   var JugadorMQ: JugadorCPU = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    JugadorPC = JugadorCPU("Computador")
-    JugadorIA = JugadorCPU("Inteligencia Artifical")
-    JugadorMQ = JugadorCPU("X", 0, 0, 0)
+    JugadorPC = new JugadorCPU("Computador")
+    JugadorIA = new JugadorCPU("Inteligencia Artifical")
+    JugadorMQ = new JugadorCPU("X", 0, 0, 0)
   }
 
   test("Un jugador tiene un nombre") {
@@ -52,5 +52,5 @@ class JugadorCPUTest extends FunSuite{
     JugadorPC.del_gems() // quitar otra gema, debe seguir en 0
     assertEquals(JugadorPC.gems, expected = 0)
   }
-  
+
 }

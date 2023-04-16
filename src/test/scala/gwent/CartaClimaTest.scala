@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package gwent
 
-class CartaClimaTest {
+import munit.FunSuite
+
+class CartaClimaTest extends FunSuite{
 
 }

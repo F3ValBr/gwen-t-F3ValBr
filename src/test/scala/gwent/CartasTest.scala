@@ -26,9 +26,9 @@ class CartasTest extends munit.FunSuite {
   val cli = "Clima"
 
   override def beforeEach(context: BeforeEach): Unit = {
-    carta1 = Cartas("Unidad",20,"Asedio","RM")
-    carta2 = Cartas("Clima","Escarcha Mordiente")
-    carta3 = Cartas("Unidad")
+    carta1 = new Cartas("Unidad",20,"Asedio","RM")
+    carta2 = new Cartas("Clima","Escarcha Mordiente")
+    carta3 = new Cartas("Unidad")
   }
 
   test("Una carta tiene una clasificacion especifico"){

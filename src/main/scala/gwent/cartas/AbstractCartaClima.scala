@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package gwent.cartas
 
 abstract class AbstractCartaClima(override val _name: String,
-                                  override val _ability: Option[String])
+                                  override val _ability: String)
   extends CartaClima {
 
   private val em = "Escarcha Mordiente"

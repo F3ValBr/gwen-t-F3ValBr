@@ -4,7 +4,7 @@ package gwent.cartas
 import java.util.Objects
 
 class CartaEscarchaMordiente(_name: String,
-                            _ability: Option[String])
+                            _ability: String)
   extends AbstractCartaClima(_name,_ability)
   with Equals {
 
