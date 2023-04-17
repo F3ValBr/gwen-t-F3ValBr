@@ -11,8 +11,8 @@ trait CartaUnidad extends Carta {
   val _ability: Option[String]
   def pow_strength(other: CartaUnidad): Unit
 }
-
 trait CartaClima extends Carta {
-  val _ability: String
-  def del_strength(other: CartaUnidad): Unit
+  def set_to_one_strength(other: CartaUnidad): Unit
 }
+
+
