@@ -5,17 +5,29 @@ import gwent.cartas.CartaUnidad
 
 import java.util.Objects
 
+/** Una clase CartaNieblaImpenetrable que genera una carta de niebla impenetrable, extendiendo a AbstractCartaClima
+ *
+ * @constructor CartaNieblaImpenetrable genera una carta de clima con un nombre definido
+ *              y sobreescribiendo la funcion para setear el valor de fuerza a 1 de una carta de unidad
+ * @param _name Nombre de la carta de clima
+ */
+
 class CartaNieblaImpenetrable(_name: String)
   extends AbstractCartaClima(_name) with Equals {
 
+  /** documentacion heredada desde [[AbstractCartaClima]]
+  * se añade a la sobreescritura la condicion de que la modificacion de fuerza
+  * solo se hace para determinado tipo de carta de unidad
+  */
   override def set_to_one_strength(other: CartaUnidad): Unit = {
     if (other.getClass.getSimpleName == "CartaDistancia")
       other._strength = 1
   }
 
+  /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaNieblaImpenetrable]
 
-  /// Documentation inherited from [[Equals]]
+  /// Documentacion heredada desde [[Equals]]
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[CartaNieblaImpenetrable]
@@ -25,7 +37,7 @@ class CartaNieblaImpenetrable(_name: String)
     }
   }
 
-  /// Documentation inherited from [[Any]]
+  /// Documentacion heredada desde [[Any]]
   override def hashCode: Int = {
     Objects.hash(classOf[CartaNieblaImpenetrable], _name)
   }
