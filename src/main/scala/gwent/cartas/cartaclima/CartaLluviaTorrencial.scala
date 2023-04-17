@@ -1,21 +1,23 @@
 package cl.uchile.dcc
-package gwent.cartas
+package gwent.cartas.cartaclima
+
+import gwent.cartas.CartaUnidad
 
 import java.util.Objects
 
-class CartaEscarchaMordiente(_name: String)
+class CartaLluviaTorrencial(_name: String)
   extends AbstractCartaClima(_name) with Equals {
 
   override def set_to_one_strength(other: CartaUnidad): Unit = {
-    if (other.getClass.getSimpleName == "CartaCuerpoACuerpo")
+    if (other.getClass.getSimpleName == "CartaAsedio")
       other._strength = 1
   }
-  override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaEscarchaMordiente]
+  override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaLluviaTorrencial]
 
   /// Documentation inherited from [[Equals]]
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
-      val other = that.asInstanceOf[CartaEscarchaMordiente]
+      val other = that.asInstanceOf[CartaLluviaTorrencial]
       _name == other._name
     } else {
       false
@@ -24,6 +26,6 @@ class CartaEscarchaMordiente(_name: String)
 
   /// Documentation inherited from [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaEscarchaMordiente], _name)
+    Objects.hash(classOf[CartaLluviaTorrencial], _name)
   }
 }

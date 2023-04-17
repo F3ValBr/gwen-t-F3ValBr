@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package gwent.cartas
+package gwent.cartas.cartaclima
+
+import gwent.cartas.{CartaClima, CartaUnidad}
 
 abstract class AbstractCartaClima(override val _name: String)
   extends CartaClima {

@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package gwent.cartas
+package gwent.cartas.cartaclima
+
+import gwent.cartas.CartaUnidad
 
 import java.util.Objects
 

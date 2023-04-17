@@ -1,12 +1,13 @@
 package cl.uchile.dcc
-package gwent.cartas
+package gwent.cartas.cartaunidad
 
-import gwent.cartas.AbstractCartaUnidad
+import gwent.cartas.CartaUnidad
+
 import java.util.Objects
 
-class CartaDistancia(_name: String,
-                     _strength: Int,
-                     _ability: Option[String])
+class CartaCuerpoACuerpo(_name: String,
+                         _strength: Int,
+                         _ability: Option[String])
   extends AbstractCartaUnidad(_name, _strength, _ability) with Equals {
 
   def this(_name: String, _strength: Int) = {
@@ -14,10 +15,8 @@ class CartaDistancia(_name: String,
   }
 
   override def pow_strength(other: CartaUnidad): Unit = {
-    if (other.getClass.getSimpleName == "CartaDistancia") {
-      if (_ability.isEmpty) {
-        other._strength
-      } else if (_ability.get == rm) {
+    if (other.getClass.getSimpleName == cardcac && _ability.isDefined) {
+      if (_ability.get == rm) {
         other._strength += 1
       } else if (_ability.get == ve && _name == other._name) {
         _strength *= 2
@@ -25,12 +24,13 @@ class CartaDistancia(_name: String,
       }
     }
   }
-  override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaDistancia]
+
+  override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaCuerpoACuerpo]
 
   /// Documentation inherited from [[Equals]]
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
-      val other = that.asInstanceOf[CartaDistancia]
+      val other = that.asInstanceOf[CartaCuerpoACuerpo]
       _name == other._name
     } else {
       false
@@ -39,6 +39,7 @@ class CartaDistancia(_name: String,
 
   /// Documentation inherited from [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaDistancia], _name)
+    Objects.hash(classOf[CartaCuerpoACuerpo], _name)
   }
+
 }

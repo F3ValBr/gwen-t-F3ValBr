@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package gwent
 
 import munit.FunSuite
-import gwent.cartas.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
 class CartaUnidadTest extends FunSuite{
   var cartacac: CartaCuerpoACuerpo = _
@@ -73,7 +73,7 @@ class CartaUnidadTest extends FunSuite{
     cartacac.pow_strength(cartaase)
     assertEquals(cartaase._strength, expected = 10)
     val cartacac5 = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1",3)
-    cartacac.pow_strength((cartacac5))
+    cartacac.pow_strength(cartacac5)
     assertEquals(cartacac5._strength, expected = 6)
   }
 }
