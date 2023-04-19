@@ -23,4 +23,27 @@ abstract class AbstractCartaUnidad(override val _name: String,
   val carddis = "CartaDistancia"
   val cardcac = "CartaCuerpoACuerpo"
   val cardase = "CartaAsedio"
+
+  /** Un metodo que permite modificar la fuerza de una carta de unidad
+   * 
+   * @constructor Modifica la fuerza de una carta de unidad, con la condiciones que se detallan en el metodo
+   * @param other
+   */
+  override def pow_strength(other: CartaUnidad): Unit = {
+    // solo puede modificar a una carta de unidad cuya clasificacion concuerde con la de
+    // esta misma carta, ademas de verificar que la carta tenga una habilidad definida
+    if (other.getClass.getSimpleName == this.getClass.getSimpleName && this._ability.isDefined) {
+
+      // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
+      if (this._ability.get == rm) {
+        other._strength += 1
+
+        // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
+        // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
+      } else if (this._ability.get == ve && this._name == other._name) {
+        this._strength *= 2
+        other._strength *= 2
+      }
+    }
+  }
 }

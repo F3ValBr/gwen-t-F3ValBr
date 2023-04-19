@@ -41,5 +41,3 @@ trait CartaClima extends Carta {
   // set_to_one_strength modifica el valor de fuerza de una carta de unidad
   def set_to_one_strength(other: CartaUnidad): Unit
 }
-
-

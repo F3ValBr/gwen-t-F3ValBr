@@ -28,27 +28,6 @@ class CartaAsedio(_name: String,
     this(_name, _strength, None)
   }
 
-  /** Un metodo pow_strength que toma una carta de unidad y modifica su atributo de fuerza
-   * @param other carta de la cual se pueden obtener sus atributos
-   */
-  override def pow_strength(other: CartaUnidad): Unit = {
-    // solo puede modificar a una carta de unidad cuya clasificacion concuerde con la de
-    // esta misma carta, ademas de verificar que la carta tenga una habilidad definida
-    if (other.getClass.getSimpleName == cardase && _ability.isDefined) {
-
-      // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
-      if (_ability.get == rm) {
-        other._strength += 1
-
-        // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
-        // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
-      } else if (_ability.get == ve && _name == other._name) {
-        _strength *= 2
-        other._strength *= 2
-      }
-    }
-  }
-
   /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaAsedio]
 

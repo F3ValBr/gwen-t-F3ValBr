@@ -3,13 +3,27 @@ package gwent.jugadores
 
 import gwent.jugadores.AbstractJugador
 
+import gwent.cartas.{Carta, DeckClass}
+
 import java.util.Objects
 
+/** Una clase JugadorCPU, extiende a AbstractJugador
+ *
+ * @constructor JugadorCPU define a la computadora contra quien juega el jugador principal
+ * @param name Nombre del jugador
+ * @param gems Gemas del jugador, inicialmente son 2
+ * @param decknum Mazo del jugador, inicialmente de 25 cartas
+ * @param handnum Mano del jugador, inicialmente de 0 cartas
+ * @param deck_list Lista de cartas del mazo del jugador
+ * @param hand_list Lista de cartas de la mano del jugador
+ */
 class JugadorCPU (name: String,
                   gems: Int = 2,
-                  deck: Int = 25,
-                  hand: Int = 0)
-  extends AbstractJugador(name,gems,deck,hand) with Equals {
+                  decknum: Int = 25,
+                  handnum: Int = 0,
+                  deck_list: DeckClass = DeckClass(),
+                  hand_list: List[Carta] = List())
+  extends AbstractJugador(name,gems,decknum,handnum,deck_list,hand_list) with Equals {
 
   /// Documentation inherited from [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[JugadorCPU]
