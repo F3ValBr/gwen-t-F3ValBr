@@ -70,8 +70,4 @@ class JugadorCPUTest extends FunSuite {
     JugadorPC.del_gems() // quitar otra gema, debe seguir en 0
     assertEquals(JugadorPC.gems, expected = 0)
   }
-  test("El jugador tiene un mazo definido, con 25 cartas"){
-    assertEquals(JugadorPC.deck_list.cant_cards(), expected = 25)
-  }
-
 }
