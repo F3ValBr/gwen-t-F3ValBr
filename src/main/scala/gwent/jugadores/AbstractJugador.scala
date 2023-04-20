@@ -3,6 +3,8 @@ package gwent.jugadores
 
 import gwent.cartas.{Carta, DeckClass}
 
+import scala.collection.mutable.ListBuffer
+
 /** Una clase abstracta AbstractJugador, extiende a Jugador
  *
  * @constructor AbstractJugador cre un jugador con un nombre, una cantidad de gemas, un mazo y una mano de cartas
@@ -20,8 +22,13 @@ abstract class AbstractJugador(override val name: String,
                                var decknum: Int,
                                var handnum: Int,
                                var deck_list: DeckClass,
-                               var hand_list: List[Carta])
+                               var hand_list: ListBuffer[Carta])
   extends Jugador {
+
+  override def isValidName(): Boolean = {
+    if (name.length > 3 && name.length < 20) true
+    else false
+  }
   /** del_gems es el metodo para borrar gemas de un jugador, borrandolas de a uno*/
   override def del_gems(): Unit = {
     if (gems > 0) {
@@ -41,7 +48,7 @@ abstract class AbstractJugador(override val name: String,
   /** Metodo auxiliar para sacar cartas de una mano en juego */
   override def del_hand(cards_take: Int): Unit = {
     handnum -= cards_take
-    hand_list.drop(cards_take)
+    for (i <- 1 to cards_take) { hand_list = hand_list.drop(1) }
   }
 
   /** tomar_cartas_mazo permite al jugador sacar un numero determinado de cartas y anadirlas a su mano */

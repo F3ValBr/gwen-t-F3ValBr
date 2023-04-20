@@ -49,5 +49,9 @@ class CartaClimaTest extends FunSuite{
     assertEquals(cartacac._strength, expected = 5)
     cartaem.set_to_one_strength(cartacac)
     assertEquals(cartacac._strength, expected = 1)
+    cartani.set_to_one_strength(cartadis)
+    assertEquals(cartadis._strength, expected = 1)
+    cartalt.set_to_one_strength(cartaase)
+    assertEquals(cartaase._strength, expected = 1)
   }
 }

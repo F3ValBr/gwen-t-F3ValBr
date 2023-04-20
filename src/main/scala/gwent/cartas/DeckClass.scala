@@ -2,8 +2,10 @@ package cl.uchile.dcc
 package gwent.cartas
 
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
-
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+
+import java.util.Objects
+import scala.collection.mutable.ListBuffer
 
 /** Clase que representa un deck de cartas
  *
@@ -16,11 +18,11 @@ import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, Car
  *              2 cartas de lluvia, 2 cartas de escarcha,
  *              1 carta de clima despejado)
  */
-class DeckClass(var _deck: List[Carta]) extends Deck {
+class DeckClass(var _deck: ListBuffer[Carta]) extends Deck with Equals {
 
   // constructor por defecto, crea un deck con todas las cartas
   def this() =
-    this(List(new CartaAsedio("1", 1),
+    this(ListBuffer(new CartaAsedio("1", 1),
       new CartaAsedio("2", 2, Some("Refuerzo Moral")),
       new CartaAsedio("3", 3),
       new CartaAsedio("4", 4, Some("Vinculo Estrecho")),
@@ -76,5 +78,23 @@ class DeckClass(var _deck: List[Carta]) extends Deck {
   // remove_card elimina una carta del deck
   override def remove_card(card: Carta): Unit = {
     _deck = _deck.filter(_ != card)
+  }
+
+  /// Documentation inherited from [[Equals]]
+  override def canEqual(that: Any): Boolean = that.isInstanceOf[DeckClass]
+
+  /// Documentation inherited from [[Equals]]
+  override def equals(that: Any): Boolean = {
+    if (canEqual(that)) {
+      val other = that.asInstanceOf[DeckClass]
+      _deck == other._deck
+    } else {
+      false
+    }
+  }
+
+  /// Documentation inherited from [[Any]]
+  override def hashCode: Int = {
+    Objects.hash(classOf[DeckClass], _deck)
   }
 }

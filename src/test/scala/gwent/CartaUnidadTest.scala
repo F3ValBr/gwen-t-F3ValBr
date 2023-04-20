@@ -8,6 +8,7 @@ class CartaUnidadTest extends FunSuite{
   var cartacac: CartaCuerpoACuerpo = _
   var cartaase: CartaAsedio = _
   var cartadis: CartaDistancia = _
+  var cartaasex: CartaAsedio = _
 
   val ase = "Asedio"
   val cac = "Cuerpo a Cuerpo"
@@ -23,6 +24,7 @@ class CartaUnidadTest extends FunSuite{
     cartacac = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 5, Some(ve))
     cartaase = new CartaAsedio("Asedio 1", 10)
     cartadis = new CartaDistancia("Distancia 1", 3, Some(rm))
+    cartaasex = new CartaAsedio("Asedio X",5,Some(rm))
   }
 
   test("Se puede crear una carta de unidad con sus atributos"){
@@ -42,6 +44,7 @@ class CartaUnidadTest extends FunSuite{
   }
   test("Hay cartas con habilidad definida como hay cartas sin habilidad"){
     assertEquals(cartaase._ability, expected = None)
+    assertEquals(cartaasex._ability, expected = Some(rm))
     assertEquals(cartadis._ability, expected = Some(rm))
     assert(!cartadis._ability.equals(cartacac._ability))
   }

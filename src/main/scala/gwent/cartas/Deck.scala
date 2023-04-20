@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package gwent.cartas
 
+import scala.collection.mutable.ListBuffer
+
 /**
  * Deck es un conjunto de cartas que se pueden mezclar, sacar y agregar cartas.
  * @param deck es una lista de cartas que representa el deck.
@@ -14,7 +16,7 @@ package gwent.cartas
  * remove_card elimina una carta del deck.
  */
 trait Deck {
-  var _deck: List[Carta]
+  var _deck: ListBuffer[Carta]
 
   // isValidDeck verifica que el deck sea válido
   def isValidDeck(): Boolean

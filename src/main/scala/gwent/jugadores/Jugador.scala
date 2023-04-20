@@ -2,6 +2,7 @@ package cl.uchile.dcc
 package gwent.jugadores
 
 import gwent.cartas.{Carta, DeckClass}
+import scala.collection.mutable.ListBuffer
 
 /** Clase jugador representa al jugador o jugadores en una partida de gwent
  *
@@ -30,8 +31,9 @@ trait Jugador {
   var decknum: Int
   var handnum: Int
   var deck_list: DeckClass
-  var hand_list: List[Carta]
+  var hand_list: ListBuffer[Carta]
 
+  def isValidName(): Boolean
   def del_gems(): Unit
 
   def first_take(): Unit

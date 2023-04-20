@@ -18,9 +18,26 @@ class DeckTest extends FunSuite{
 
   override def beforeEach(context: BeforeEach): Unit = {
     deck1 = new DeckClass()
-    deck2 = new DeckClass(List(CartaAsedio("X",1)))
+    deck2 = new DeckClass(ListBuffer(CartaAsedio("X",1)))
   }
 
+  test("Dos decks pueden contener distintos elementos"){
+    val deck3: DeckClass = new DeckClass()
+    assert(deck1._deck.equals(deck3._deck))
+    assertNotEquals(deck1._deck, deck2._deck)
+    assert(!deck1._deck.equals(deck2._deck))
+  }
+  test("Dos decks pueden ser iguales"){
+    val deck3: DeckClass = new DeckClass()
+    assert(deck1.equals(deck3))
+    assertNotEquals(deck1, deck2)
+    assert(!deck1.equals(deck2))
+  }
+  test("El hashcode de dos decks puede ser igual"){
+    val deck3: DeckClass = new DeckClass()
+    assert(deck1.##.equals(deck3.##))
+    assertNotEquals(deck1.##, deck2.##)
+  }
   test("Deck tiene 25 cartas, y no puede tener menos"){
     // deck con 25 cartas
     assertEquals(deck1.cant_cards(), 25)

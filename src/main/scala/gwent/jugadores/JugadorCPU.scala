@@ -2,10 +2,9 @@ package cl.uchile.dcc
 package gwent.jugadores
 
 import gwent.jugadores.AbstractJugador
-
 import gwent.cartas.{Carta, DeckClass}
-
 import java.util.Objects
+import scala.collection.mutable.ListBuffer
 
 /** Una clase JugadorCPU, extiende a AbstractJugador
  *
@@ -22,7 +21,7 @@ class JugadorCPU (name: String,
                   decknum: Int = 25,
                   handnum: Int = 0,
                   deck_list: DeckClass = DeckClass(),
-                  hand_list: List[Carta] = List())
+                  hand_list: ListBuffer[Carta] = ListBuffer())
   extends AbstractJugador(name,gems,decknum,handnum,deck_list,hand_list) with Equals {
 
   /// Documentation inherited from [[Equals]]
