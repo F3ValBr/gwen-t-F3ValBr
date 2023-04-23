@@ -1,9 +1,9 @@
 package cl.uchile.dcc
 package gwent
 
-import cl.uchile.dcc.gwent.cartas.*
-import cl.uchile.dcc.gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
-import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+import gwent.cartas.*
+import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 import munit.FunSuite
 
 class CartaClimaTest extends FunSuite{
@@ -45,13 +45,13 @@ class CartaClimaTest extends FunSuite{
   }
   test("La habilidad de una carta de clima solo afecta a la carta de unidad correspondiente"){
     // Carta Niebla Impenetrable solo puede cambiar stats de carta Cuerpo a Cuerpo
-    cartani.set_to_one_strength(cartacac)
+    cartani.mod_strength(cartacac)
     assertEquals(cartacac._strength, expected = 5)
-    cartaem.set_to_one_strength(cartacac)
+    cartaem.mod_strength(cartacac)
     assertEquals(cartacac._strength, expected = 1)
-    cartani.set_to_one_strength(cartadis)
+    cartani.mod_strength(cartadis)
     assertEquals(cartadis._strength, expected = 1)
-    cartalt.set_to_one_strength(cartaase)
+    cartalt.mod_strength(cartaase)
     assertEquals(cartaase._strength, expected = 1)
   }
 }

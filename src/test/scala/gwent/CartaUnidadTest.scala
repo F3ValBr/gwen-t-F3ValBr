@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package gwent
 
 import munit.FunSuite
-import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
 class CartaUnidadTest extends FunSuite{
   var cartacac: CartaCuerpoACuerpo = _
@@ -29,6 +29,14 @@ class CartaUnidadTest extends FunSuite{
 
   test("Se puede crear una carta de unidad con sus atributos"){
     assertEquals(new CartaAsedio(namex,strengthx),cartaase)
+  }
+  test("Una carta de unidad tiene un rango de parametros que la hace valida"){
+    assert(cartaase.validCartaUnidad())
+    assert(cartacac.validCartaUnidad())
+    assert(cartadis.validCartaUnidad())
+    assert(cartaasex.validCartaUnidad())
+    assert(!new CartaAsedio("",1).validCartaUnidad())
+    assert(!new CartaAsedio("a",16).validCartaUnidad())
   }
   test("El hashcode de una carta de unidad es consistente con Equals"){
     assertEquals(new CartaAsedio(namex,strengthx).##, cartaase.##)

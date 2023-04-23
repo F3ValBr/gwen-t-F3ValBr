@@ -24,10 +24,20 @@ abstract class AbstractCartaUnidad(override val _name: String,
   val cardcac = "CartaCuerpoACuerpo"
   val cardase = "CartaAsedio"
 
+  /** Un metodo validCartaUnidad que permite saber si una carta de unidad es valida o no
+   * 
+   * @return Un booleano que indica si la carta de unidad es valida o no
+   */
+  override def validCartaUnidad(): Boolean = {
+    // una carta de unidad es valida si su fuerza es mayor a 0 y menor a 11
+    // y si su nombre no es vacio
+    _strength > 0 && _strength <= 15 && _name != ""
+  } 
+
   /** Un metodo que permite modificar la fuerza de una carta de unidad
    * 
-   * @constructor Modifica la fuerza de una carta de unidad, con la condiciones que se detallan en el metodo
-   * @param other
+   * Modifica la fuerza de una carta de unidad, con la condiciones que se detallan en el metodo
+   * @param other Una carta de unidad que se desea modificar
    */
   override def pow_strength(other: CartaUnidad): Unit = {
     // solo puede modificar a una carta de unidad cuya clasificacion concuerde con la de

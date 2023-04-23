@@ -30,6 +30,8 @@ trait CartaUnidad extends Carta {
   val _ability: Option[String]
   // pow_strength modifica el valor de fuerza de otra carta de unidad
   def pow_strength(other: CartaUnidad): Unit
+  // validCartaUnidad verifica si una carta cumple con ciertos parametros de CartaUnidad
+  def validCartaUnidad(): Boolean
 }
 
 /** Un trait donde una carta tiene una clasificacion CartaClima
@@ -38,6 +40,6 @@ trait CartaUnidad extends Carta {
  *              un metodo que cambia a 1 el valor de fuerza de una carta de unidad
  */
 trait CartaClima extends Carta {
-  // set_to_one_strength modifica el valor de fuerza de una carta de unidad
-  def set_to_one_strength(other: CartaUnidad): Unit
+  // mod_strength modifica el valor de fuerza de una carta de unidad
+  def mod_strength(other: CartaUnidad): Unit
 }

@@ -15,11 +15,12 @@ import java.util.Objects
 class CartaNieblaImpenetrable(_name: String)
   extends AbstractCartaClima(_name) with Equals {
 
-  /** documentacion heredada desde [[AbstractCartaClima]]
+  /** se sobreescribe la funcion mod_strength para modificar el valor de
+  * fuerza de una carta de unidad
   * se añade a la sobreescritura la condicion de que la modificacion de fuerza
   * solo se hace para determinado tipo de carta de unidad
   */
-  override def set_to_one_strength(other: CartaUnidad): Unit = {
+  override def mod_strength(other: CartaUnidad): Unit = {
     if (other.getClass.getSimpleName == "CartaDistancia")
       other._strength = 1
   }
