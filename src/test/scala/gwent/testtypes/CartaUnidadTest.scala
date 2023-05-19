@@ -1,8 +1,9 @@
 package cl.uchile.dcc
-package gwent
+package gwent.testtypes
+
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
 import munit.FunSuite
-import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
 class CartaUnidadTest extends FunSuite{
   var cartacac: CartaCuerpoACuerpo = _

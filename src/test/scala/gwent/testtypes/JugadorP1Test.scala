@@ -1,9 +1,9 @@
 package cl.uchile.dcc
-package gwent
+package gwent.testtypes
 
-import gwent.jugadores.JugadorP1
 import gwent.cartas.DeckClass
 import gwent.cartas.cartaunidad.CartaAsedio
+import gwent.jugadores.JugadorP1
 
 import munit.FunSuite
 

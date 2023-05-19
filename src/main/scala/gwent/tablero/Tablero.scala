@@ -15,11 +15,11 @@ trait ZonaCartasCombate extends Tablero {
   var cartas_zona_in: List[CartaUnidad]
   //def add_card(zona: ZonaCartasCombate, carta: CartaUnidad): Unit
 
-  def add_card_distancia(zonaDis: ZonaDistancia, cartadis: CartaDistancia): Unit
+  def add_card_distancia(zonaDis: ZonaDistancia, card: CartaDistancia): Unit
 
-  def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, cartacac: CartaCuerpoACuerpo): Unit
+  def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, card: CartaCuerpoACuerpo): Unit
 
-  def add_card_asedio(zonaAse: ZonaAsedio, cartaase: CartaAsedio): Unit
+  def add_card_asedio(zonaAse: ZonaAsedio, card: CartaAsedio): Unit
 }
 
 trait ZonaCartasClima extends Tablero {

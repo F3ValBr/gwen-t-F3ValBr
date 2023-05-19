@@ -1,9 +1,10 @@
 package cl.uchile.dcc
-package gwent
+package gwent.testtypes
 
 import gwent.cartas.*
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+
 import munit.FunSuite
 
 class CartaClimaTest extends FunSuite{

@@ -1,9 +1,9 @@
 package cl.uchile.dcc
-package gwent
-
-import gwent.cartas.{Carta, DeckClass}
+package gwent.testtypes
 
 import gwent.cartas.cartaunidad.CartaAsedio
+import gwent.cartas.{Carta, DeckClass}
+
 import munit.FunSuite
 
 import scala.collection.mutable.ListBuffer

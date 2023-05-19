@@ -1,10 +1,10 @@
 package cl.uchile.dcc
-package gwent
+package gwent.testtypes
 
 import gwent.cartas
-import gwent.cartas.{Carta, Deck, DeckClass}
-import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+import gwent.cartas.{Carta, Deck, DeckClass}
 import gwent.jugadores.{JugadorCPU, JugadorP1}
 
 import munit.FunSuite
