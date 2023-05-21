@@ -13,15 +13,15 @@ class ZonaCuerpoACuerpo(var cartas_zona_in: List[CartaUnidad] = List()) extends 
     zona.add_card_cuerpo_a_cuerpo(this, card)
   }
 
-  override def add_card_asedio(zonaCAC: ZonaCuerpoACuerpo, card: CartaAsedio): Unit = {
+  override def add_card_asedio(zonaAse: ZonaAsedio, card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de asedio a la zona de cuerpo a cuerpo")
   }
 
-  override def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, card: CartaCuerpoACuerpo): Unit = {
+  override def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, card: CartaUnidad): Unit = {
     cartas_zona_in = card :: cartas_zona_in
   }
 
-  override def add_card_distancia(zonaCAC: ZonaCuerpoACuerpo, card: CartaDistancia): Unit = {
+  override def add_card_distancia(zonaDis: ZonaDistancia, card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de distancia a la zona de cuerpo a cuerpo")
   }
 }

@@ -13,15 +13,15 @@ class ZonaAsedio(var cartas_zona_in: List[CartaUnidad] = List()) extends ZonaCar
     zona.add_card_asedio(this, card)
   }
 
-  def add_card_asedio(zonaAse: ZonaAsedio, card: CartaAsedio): Unit = {
+  def add_card_asedio(zonaAse: ZonaAsedio, card: CartaUnidad): Unit = {
     cartas_zona_in = card :: cartas_zona_in
   }
 
-  def add_card_cuerpo_a_cuerpo(zonaAse: ZonaAsedio, card: CartaCuerpoACuerpo): Unit = {
+  def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de cuerpo a cuerpo a la zona de asedio")
   }
 
-  def add_card_distancia(zonaAse: ZonaAsedio, card: CartaDistancia): Unit = {
+  def add_card_distancia(zonaDis: ZonaDistancia, card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de distancia a la zona de asedio")
   }
 
