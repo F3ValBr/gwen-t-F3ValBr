@@ -9,7 +9,7 @@ import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, 
 
 class ZonaCuerpoACuerpo(var cartas_zona_in: List[CartaUnidad] = List()) extends ZonaCartasCombate{
 
-  def add_card(card: CartaUnidad): Unit = {
+  override def add_card(card: CartaUnidad): Unit = {
     card.add_card_to(this)
   }
 
