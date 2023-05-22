@@ -3,6 +3,9 @@ package gwent.cartas.cartaunidad
 
 import gwent.cartas.CartaUnidad
 
+import cl.uchile.dcc.gwent.tablero.ZonaCartasCombate
+import cl.uchile.dcc.gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+
 import java.util.Objects
 
 /** Una clase CartaCuerpoACuerpo que extiende a AbstractCartaUnidad
@@ -27,6 +30,12 @@ class CartaCuerpoACuerpo(_name: String,
   def this(_name: String, _strength: Int) = {
     this(_name, _strength, None)
   }
+
+  //#######################################################################
+  override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
+    tablero_zona.add_card_cuerpo_a_cuerpo(this)
+  }
+  //#######################################################################
 
   /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaCuerpoACuerpo]

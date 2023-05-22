@@ -3,6 +3,7 @@ package gwent.testtypes
 
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 
+import cl.uchile.dcc.gwent.Exceptions.InvalidPosForCardException
 import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
 class TableroTest extends munit.FunSuite{
@@ -21,11 +22,13 @@ class TableroTest extends munit.FunSuite{
     val card_ase = new CartaAsedio("ase_1",5)
     val card_cac = new CartaCuerpoACuerpo("cac_1",5)
     assert(zonadis.cartas_zona_in.isEmpty)
-    zonadis.add_card(zonadis,card_dis)
+    zonadis.add_card(card_dis)
     assert(zonadis.cartas_zona_in.contains(card_dis))
     println(zonadis.cartas_zona_in)
-    zonadis.add_card(zonadis,card_ase)
-    assert(zonadis.cartas_zona_in.contains(card_ase))
+    interceptMessage[InvalidPosForCardException]("No se puede agregar una carta de asedio a la zona de distancia"){
+      zonadis.add_card(card_ase)
+    }
+    //assert(zonadis.cartas_zona_in.contains(card_ase))
     println(zonadis.cartas_zona_in)
   }
 }

@@ -3,6 +3,9 @@ package gwent.cartas.cartaunidad
 
 import gwent.cartas.CartaUnidad
 
+import gwent.tablero.ZonaCartasCombate
+import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+
 import java.util.Objects
 
 /** Una clase CartaAsedio que extiende a AbstractCartaUnidad
@@ -27,6 +30,12 @@ class CartaAsedio(_name: String,
   def this(_name: String, _strength: Int) = {
     this(_name, _strength, None)
   }
+
+  //#######################################################################
+  override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
+    tablero_zona.add_card_asedio(this)
+  }
+  //#######################################################################
 
   /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaAsedio]

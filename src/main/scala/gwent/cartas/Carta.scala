@@ -1,6 +1,9 @@
 package cl.uchile.dcc
 package gwent.cartas
 
+import cl.uchile.dcc.gwent.tablero.ZonaCartasCombate
+import cl.uchile.dcc.gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+
 import javax.print.attribute.standard.MediaSize.Other
 
 /** Un trait que representa una Carta, este es el supertrait de las cartas
@@ -32,6 +35,14 @@ trait CartaUnidad extends Carta {
   def pow_strength(other: CartaUnidad): Unit
   // validCartaUnidad verifica si una carta cumple con ciertos parametros de CartaUnidad
   def validCartaUnidad(): Boolean
+  // add_card_to agrega la carta a la zona del tablero correspondiente
+  def add_card_to(tablero_zona: ZonaCartasCombate): Unit
+  
+  /*
+  def add_card_to_caczone(zonaCAC: ZonaCuerpoACuerpo): Unit
+  def add_card_to_asezone(zonaAse: ZonaAsedio): Unit
+  def add_card_to_diszone(zonaDis: ZonaDistancia): Unit
+  */
 }
 
 /** Un trait donde una carta tiene una clasificacion CartaClima

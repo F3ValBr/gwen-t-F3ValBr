@@ -9,19 +9,19 @@ import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, 
 
 class ZonaCuerpoACuerpo(var cartas_zona_in: List[CartaUnidad] = List()) extends ZonaCartasCombate{
 
-  def add_card(zona: ZonaCartasCombate, card: CartaUnidad): Unit = {
-    zona.add_card_cuerpo_a_cuerpo(this, card)
+  def add_card(card: CartaUnidad): Unit = {
+    card.add_card_to(this)
   }
 
-  override def add_card_asedio(zonaAse: ZonaAsedio, card: CartaUnidad): Unit = {
+  override def add_card_asedio(card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de asedio a la zona de cuerpo a cuerpo")
   }
 
-  override def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, card: CartaUnidad): Unit = {
+  override def add_card_cuerpo_a_cuerpo(card: CartaUnidad): Unit = {
     cartas_zona_in = card :: cartas_zona_in
   }
 
-  override def add_card_distancia(zonaDis: ZonaDistancia, card: CartaUnidad): Unit = {
+  override def add_card_distancia(card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de distancia a la zona de cuerpo a cuerpo")
   }
 }
