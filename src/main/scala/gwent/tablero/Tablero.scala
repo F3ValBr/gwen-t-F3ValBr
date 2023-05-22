@@ -3,8 +3,8 @@ package gwent.tablero
 
 import gwent.cartas.{Carta, CartaClima, CartaUnidad}
 
-import cl.uchile.dcc.gwent.cartas.cartaunidad.*
-import cl.uchile.dcc.gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+import gwent.cartas.cartaunidad.*
+import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 
 trait Tablero {
 

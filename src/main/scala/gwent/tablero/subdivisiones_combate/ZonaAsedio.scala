@@ -3,15 +3,11 @@ package gwent.tablero.subdivisiones_combate
 
 import gwent.tablero.{Tablero, ZonaCartasCombate}
 
-import cl.uchile.dcc.gwent.Exceptions.InvalidPosForCardException
-import cl.uchile.dcc.gwent.cartas.{Carta, CartaUnidad}
-import cl.uchile.dcc.gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+import gwent.Exceptions.InvalidPosForCardException
+import gwent.cartas.{Carta, CartaUnidad}
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
-class ZonaAsedio(var cartas_zona_in: List[CartaUnidad] = List()) extends ZonaCartasCombate{
-
-  override def add_card(card: CartaUnidad): Unit = {
-    card.add_card_to(this)
-  }
+class ZonaAsedio(cartas_zona_in: List[CartaUnidad] = List()) extends AbstractZonaCombateJugador(cartas_zona_in){
 
   override def add_card_asedio(card: CartaUnidad): Unit = {
     cartas_zona_in = card :: cartas_zona_in
