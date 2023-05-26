@@ -39,6 +39,19 @@ abstract class AbstractCartaUnidad(override val _name: String,
    * Modifica la fuerza de una carta de unidad, con la condiciones que se detallan en el metodo
    * @param other Una carta de unidad que se desea modificar
    */
+  override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
+    if (card_modifier._ability.get == rm) {
+      card_modified._strength += 1
+
+      // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
+      // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
+    } else if (card_modifier._ability.get == ve && card_modified._name == card_modifier._name) {
+      card_modified._strength *= 2
+      card_modifier._strength *= 2
+    }
+  }
+
+  /*
   override def pow_strength(other: CartaUnidad): Unit = {
     // solo puede modificar a una carta de unidad cuya clasificacion concuerde con la de
     // esta misma carta, ademas de verificar que la carta tenga una habilidad definida
@@ -55,5 +68,5 @@ abstract class AbstractCartaUnidad(override val _name: String,
         other._strength *= 2
       }
     }
-  }
+  }*/
 }

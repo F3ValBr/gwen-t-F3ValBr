@@ -15,10 +15,11 @@ class CartaClimaDespejado(_name: String)
 
   /** se sobreescribe la funcion mod_strength para modificar el valor de
    * fuerza de una carta de unidad
-   * Este no es el comportamiento apropiado de esta carta, investigar como setear valores y devolverlos
+   * Esta funcion se encarga de setear la fuerza en el valor original que tenia
+   * previo a ser afectado por una carta climatica de otro tipo
    */
   override def mod_strength(other: CartaUnidad): Unit = {
-    other._strength = 1
+    other._current_strength = other._strength
   }
 
   /// Documentacion heredada desde [[Equals]]

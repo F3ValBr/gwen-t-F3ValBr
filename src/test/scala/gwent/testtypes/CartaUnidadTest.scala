@@ -3,6 +3,7 @@ package gwent.testtypes
 
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
+import cl.uchile.dcc.gwent.Exceptions.InvalidTypeModStrengthException
 import munit.FunSuite
 
 class CartaUnidadTest extends FunSuite{
@@ -63,29 +64,35 @@ class CartaUnidadTest extends FunSuite{
 
     // una carta con Vinculo Estrecho duplica la fuerza de otra carta
     // si la carta tiene distinto nombre, no modifica nada
-    cartacac.pow_strength(cartacac2)
+    cartacac.pow_strength_of(cartacac2)
     assertEquals(cartacac2._strength, expected = 4)
 
     // si la carta tiene el mismo nombre que la que modificara, se cambia la fuerza de esa carta y de si misma
-    cartacac.pow_strength(cartacac1var)
+    cartacac.pow_strength_of(cartacac1var)
+    //cartacac1var.pow_strength(cartacac)
     assertEquals(cartacac1var._strength, expected = 6)
     assertEquals(cartacac._strength, expected = 10) // fza cartacac = 10
 
     // una carta con Refuerzo Moral aumenta en 1 la fuerza de otra carta, sin mod a si mismo
-    cartacac2.pow_strength(cartacac)
+    cartacac2.pow_strength_of(cartacac)
+    //cartacac.pow_strength(cartacac2)
     assertEquals(cartacac._strength, expected = 11) // fza cartacac = 11
     assertEquals(cartacac2._strength, expected = 4)
 
     // una carta sin habilidad alguna no cambia la fuerza de otra carta
     val cartaase2 = new CartaAsedio("Asedio 2", 6)
-    cartaase2.pow_strength(cartaase)
+    cartaase2.pow_strength_of(cartaase)
     assertEquals(cartaase._strength, expected = 10)
   }
-  test("Una carta de unidad solo modifica a otras de su misma clasificacion") {
-    cartacac.pow_strength(cartaase)
+  test("Una carta de unidad solo modifica a otras de su misma clasificacion, siempre que tenga una habilidad definida"){
+    interceptMessage[InvalidTypeModStrengthException]("Carta Asedio no puede modificar fuerza de Carta Cuerpo a Cuerpo"){
+      cartacac.pow_strength_of(cartaase)
+    }
     assertEquals(cartaase._strength, expected = 10)
     val cartacac5 = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1",3)
-    cartacac.pow_strength(cartacac5)
+    cartacac.pow_strength_of(cartacac5)
     assertEquals(cartacac5._strength, expected = 6)
+    cartacac5.pow_strength_of(cartacac)
+    assertEquals(cartacac._strength, expected = 10)
   }
 }

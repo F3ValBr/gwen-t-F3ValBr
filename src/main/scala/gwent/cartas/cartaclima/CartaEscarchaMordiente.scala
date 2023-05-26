@@ -21,7 +21,7 @@ class CartaEscarchaMordiente(_name: String)
    */
   override def mod_strength(other: CartaUnidad): Unit = {
     if (other.getClass.getSimpleName == "CartaCuerpoACuerpo")
-      other._strength = 1
+      other._current_strength = 1
   }
 
   /// Documentacion heredada desde [[Equals]]

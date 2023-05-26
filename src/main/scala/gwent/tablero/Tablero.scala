@@ -7,8 +7,8 @@ import gwent.cartas.cartaunidad.*
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 
 /** Tablero de juego de Gwent
- * @constructor crea un tablero de juego de Gwent
  *
+ * @constructor crea un tablero de juego de Gwent
  * @param cartas_zona_in lista de cartas en la zona de combate
  */
 trait Tablero {

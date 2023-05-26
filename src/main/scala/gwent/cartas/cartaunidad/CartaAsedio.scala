@@ -2,9 +2,10 @@ package cl.uchile.dcc
 package gwent.cartas.cartaunidad
 
 import gwent.cartas.CartaUnidad
-
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+
+import gwent.Exceptions.InvalidTypeModStrengthException
 
 import java.util.Objects
 
@@ -32,6 +33,28 @@ class CartaAsedio(_name: String,
   }
 
   //#######################################################################
+
+  var _current_strength: Int = _strength
+
+  override def pow_strength_of(other: CartaUnidad): Unit = {
+    if (this._ability.isDefined) {
+      other.gmod_pow_strength_asedio(this)
+      //this.gmod_pow_strength_asedio(other)
+    }
+  }
+
+  override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo/*other: CartaUnidad*/): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Asedio no puede modificar fuerza de Carta Cuerpo a Cuerpo")
+  }
+
+  override def gmod_pow_strength_distancia(other: CartaDistancia/*other: CartaUnidad*/): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Asedio no puede modificar fuerza de Carta Distancia")
+  }
+
+  override def gmod_pow_strength_asedio(other: CartaAsedio/*other: CartaUnidad*/): Unit = {
+    power_modder(other,this)
+  }
+  
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
     tablero_zona.add_card_asedio(this)
   }
