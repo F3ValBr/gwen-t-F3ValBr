@@ -84,10 +84,14 @@ class CartaUnidadTest extends FunSuite{
     cartaase2.pow_strength_of(cartaase)
     assertEquals(cartaase._strength, expected = 10)
   }
-  test("Una carta de unidad solo modifica a otras de su misma clasificacion, siempre que tenga una habilidad definida"){
-    interceptMessage[InvalidTypeModStrengthException]("Carta Asedio no puede modificar fuerza de Carta Cuerpo a Cuerpo"){
+  test("Una carta de unidad solo modifica a otras de su misma clasificacion, siempre que tenga una habilidad definida") {
+    interceptMessage[InvalidTypeModStrengthException]("Carta Asedio no puede modificar fuerza de Carta Cuerpo a Cuerpo") {
       cartacac.pow_strength_of(cartaase)
     }
+    interceptMessage[InvalidTypeModStrengthException]("Carta de Distancia no puede modificar fuerza de carta de Cuerpo a Cuerpo"){
+      cartacac.pow_strength_of(cartadis)
+    }
+    assertEquals(cartadis._strength, expected = 3)
     assertEquals(cartaase._strength, expected = 10)
     val cartacac5 = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1",3)
     cartacac.pow_strength_of(cartacac5)

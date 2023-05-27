@@ -2,12 +2,13 @@ package cl.uchile.dcc
 package gwent.tablero.subdivisiones_combate
 
 import gwent.tablero.{Tablero, ZonaCartasCombate}
-
 import gwent.Exceptions.InvalidPosForCardException
 import gwent.cartas.{Carta, CartaUnidad}
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
-class ZonaDistancia(cartas_zona_in: List[CartaUnidad] = List()) extends AbstractZonaCombateJugador(cartas_zona_in){
+import scala.collection.mutable.ListBuffer
+
+class ZonaDistancia(cartas_zona_in: ListBuffer[CartaUnidad] = ListBuffer()) extends AbstractZonaCombateJugador(cartas_zona_in){
 
   override def add_card_asedio(card: CartaUnidad): Unit = {
     throw new InvalidPosForCardException("No se puede agregar una carta de asedio a la zona de distancia")
@@ -18,6 +19,6 @@ class ZonaDistancia(cartas_zona_in: List[CartaUnidad] = List()) extends Abstract
   }
 
   override def add_card_distancia(card: CartaUnidad): Unit = {
-    cartas_zona_in = card :: cartas_zona_in
+    card_adder(this.cartas_zona_in, card)
   }
 }

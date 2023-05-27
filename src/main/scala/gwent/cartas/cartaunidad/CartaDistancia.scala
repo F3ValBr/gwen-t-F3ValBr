@@ -37,7 +37,6 @@ class CartaDistancia(_name: String,
   override def pow_strength_of(other: CartaUnidad): Unit = {
     if (this._ability.isDefined) {
       other.gmod_pow_strength_distancia(this)
-      //this.gmod_pow_strength_distancia(other)
     }
   }
 

@@ -5,15 +5,30 @@ import gwent.cartas.CartaUnidad
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 
-abstract class AbstractZonaCombateJugador(var cartas_zona_in: List[CartaUnidad]) extends ZonaCartasCombate {
+import scala.collection.mutable.ListBuffer
+
+abstract class AbstractZonaCombateJugador(var cartas_zona_in: ListBuffer[CartaUnidad]) extends ZonaCartasCombate{
+
+  override def clean_zone(): Unit = {
+    cartas_zona_in = ListBuffer()
+  }
+
+  override def counter_strength(/*group_of_cards: List[CartaUnidad]*/): Int = {
+    var total_strength: Int = 0
+    for (card <- cartas_zona_in) {
+      if (card._current_strength > 0) {
+        total_strength += card._current_strength
+      }
+    }
+    //group_of_cards.foreach(card => total_strength += card._current_strength)
+    total_strength
+  }
 
   override def add_card(card: CartaUnidad): Unit = {
     card.add_card_to(this)
   }
-  //override def add_card_distancia(zonaDis: ZonaDistancia, card: CartaUnidad): Unit = ???
 
-  //override def add_card_cuerpo_a_cuerpo(zonaCAC: ZonaCuerpoACuerpo, card: CartaUnidad): Unit = ???
-
-  //override def add_card_asedio(zonaAse: ZonaAsedio, card: CartaUnidad): Unit = ???
-
+  override def card_adder(list_of_cards: ListBuffer[CartaUnidad], card: CartaUnidad): Unit = {
+    list_of_cards += card
+  }
 }
