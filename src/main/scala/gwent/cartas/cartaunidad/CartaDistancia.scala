@@ -2,10 +2,11 @@ package cl.uchile.dcc
 package gwent.cartas.cartaunidad
 
 import gwent.cartas.CartaUnidad
-
 import gwent.Exceptions.InvalidTypeModStrengthException
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+
+import gwent.cartas.cartaclima.{CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 
 import java.util.Objects
 
@@ -31,7 +32,7 @@ class CartaDistancia(_name: String,
     this(_name, _strength, None)
   }
 
-  var _current_strength: Int = _strength
+  _current_strength = _strength
 
   override def pow_strength_of(other: CartaUnidad): Unit = {
     if (this._ability.isDefined) {
@@ -56,6 +57,19 @@ class CartaDistancia(_name: String,
     tablero_zona.add_card_distancia(this)
   }
   //#######################################################################
+
+  override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Distancia no puede ser afectada por Carta Escarcha Mordiente")
+  }
+
+  override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Distancia no puede ser afectada por Carta Lluvia Torrencial")
+  }
+
+  override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
+    this._current_strength = 1
+  }
+
 
   /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaDistancia]

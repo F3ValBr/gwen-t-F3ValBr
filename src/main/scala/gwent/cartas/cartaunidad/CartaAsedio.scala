@@ -4,8 +4,9 @@ package gwent.cartas.cartaunidad
 import gwent.cartas.CartaUnidad
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
-
 import gwent.Exceptions.InvalidTypeModStrengthException
+
+import gwent.cartas.cartaclima.{CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 
 import java.util.Objects
 
@@ -34,7 +35,7 @@ class CartaAsedio(_name: String,
 
   //#######################################################################
 
-  var _current_strength: Int = _strength
+  _current_strength = _strength
 
   override def pow_strength_of(other: CartaUnidad): Unit = {
     if (this._ability.isDefined) {
@@ -58,6 +59,19 @@ class CartaAsedio(_name: String,
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
     tablero_zona.add_card_asedio(this)
   }
+
+  override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Asedio no puede ser afectada por Carta Escarcha Mordiente")
+  }
+
+  override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
+    this._current_strength = 1
+  }
+
+  override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Aseido no puede ser afectada por Carta Niebla Impenetrable")
+  }
+
   //#######################################################################
 
   /// Documentacion heredada desde [[Equals]]

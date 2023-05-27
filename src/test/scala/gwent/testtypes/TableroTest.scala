@@ -24,10 +24,8 @@ class TableroTest extends munit.FunSuite{
     assert(zonadis.cartas_zona_in.isEmpty)
     zonadis.add_card(card_dis)
     assert(zonadis.cartas_zona_in.contains(card_dis))
-    println(zonadis.cartas_zona_in)
     interceptMessage[InvalidPosForCardException]("No se puede agregar una carta de asedio a la zona de distancia"){
       zonadis.add_card(card_ase)
     }
-    println(zonadis.cartas_zona_in)
   }
 }

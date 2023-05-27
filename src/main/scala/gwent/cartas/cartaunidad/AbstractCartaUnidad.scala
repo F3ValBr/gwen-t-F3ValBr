@@ -3,6 +3,8 @@ package gwent.cartas.cartaunidad
 
 import gwent.cartas.CartaUnidad
 
+import cl.uchile.dcc.gwent.cartas.cartaclima.CartaClimaDespejado
+
 /** Una clase abstracta que genera a las cartas de unidad
  *
  * @constructor Crea una nueva Carta de Unidad con un nombre, valor de fuerza y habilidad dadas
@@ -15,6 +17,8 @@ abstract class AbstractCartaUnidad(override val _name: String,
                                    var _strength: Int,
                                    override val _ability: Option[String])
   extends CartaUnidad {
+
+  var _current_strength: Int = _strength
 
   // los siguientes valores son para simplificar la evaluacion de algunos metodos en cada carta
   val rm = "Refuerzo Moral"
@@ -40,33 +44,19 @@ abstract class AbstractCartaUnidad(override val _name: String,
    * @param other Una carta de unidad que se desea modificar
    */
   override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
+    // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
     if (card_modifier._ability.get == rm) {
       card_modified._strength += 1
-
-      // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
-      // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
-    } else if (card_modifier._ability.get == ve && card_modified._name == card_modifier._name) {
+    }
+    // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
+    // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
+    else if (card_modifier._ability.get == ve && card_modified._name == card_modifier._name) {
       card_modified._strength *= 2
       card_modifier._strength *= 2
     }
   }
 
-  /*
-  override def pow_strength(other: CartaUnidad): Unit = {
-    // solo puede modificar a una carta de unidad cuya clasificacion concuerde con la de
-    // esta misma carta, ademas de verificar que la carta tenga una habilidad definida
-    if (other.getClass.getSimpleName == this.getClass.getSimpleName && this._ability.isDefined) {
-
-      // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
-      if (this._ability.get == rm) {
-        other._strength += 1
-
-        // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
-        // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
-      } else if (this._ability.get == ve && this._name == other._name) {
-        this._strength *= 2
-        other._strength *= 2
-      }
-    }
-  }*/
+  override def get_mod_strength_cd(other: CartaClimaDespejado): Unit = {
+    this._current_strength = this._strength
+  }
 }

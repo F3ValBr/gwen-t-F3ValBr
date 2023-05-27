@@ -29,6 +29,12 @@ abstract class AbstractJugador(override val name: String,
     if (name.length > 3 && name.length < 20) true
     else false
   }
+
+  override def isValidGems(): Boolean = {
+    if (gems >= 0 && gems <= 2) true
+    else false
+  }
+  
   /** del_gems es el metodo para borrar gemas de un jugador, borrandolas de a uno*/
   override def del_gems(): Unit = {
     if (gems > 0) {

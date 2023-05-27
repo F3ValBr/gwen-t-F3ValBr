@@ -2,10 +2,11 @@ package cl.uchile.dcc
 package gwent.cartas.cartaunidad
 
 import gwent.cartas.CartaUnidad
-
 import gwent.Exceptions.InvalidTypeModStrengthException
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
+
+import gwent.cartas.cartaclima.{CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 
 import java.util.Objects
 
@@ -32,7 +33,7 @@ class CartaCuerpoACuerpo(_name: String,
     this(_name, _strength, None)
   }
 
-  var _current_strength: Int = _strength
+  _current_strength = _strength
 
   override def pow_strength_of(other: CartaUnidad): Unit = {
     if (this._ability.isDefined) {
@@ -51,6 +52,20 @@ class CartaCuerpoACuerpo(_name: String,
 
   override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo/*other: CartaUnidad*/): Unit = {
     power_modder(other,this)
+  }
+
+
+
+  override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
+    this._current_strength = 1
+  }
+
+  override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Cuerpo a Cuerpo no puede ser afectada por Carta Lluvia Torrencial")
+  }
+
+  override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
+    throw new InvalidTypeModStrengthException("Carta Cuerpo a Cuerpo no puede ser afectada por Carta Niebla Impenetrable")
   }
 
 

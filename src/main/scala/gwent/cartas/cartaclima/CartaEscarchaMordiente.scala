@@ -3,6 +3,8 @@ package gwent.cartas.cartaclima
 
 import gwent.cartas.CartaUnidad
 
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+
 import java.util.Objects
 
 /** Una clase CartaEscarchaMordiente que genera una carta de escarcha mordiente, extendiendo a AbstractCartaClima
@@ -20,8 +22,11 @@ class CartaEscarchaMordiente(_name: String)
    * solo se hace para determinado tipo de carta de unidad
    */
   override def mod_strength(other: CartaUnidad): Unit = {
-    if (other.getClass.getSimpleName == "CartaCuerpoACuerpo")
-      other._current_strength = 1
+    other.get_mod_strength_em(this)
+  }
+
+  def get_mod_strength_cd(other: CartaClimaDespejado): Unit = {
+
   }
 
   /// Documentacion heredada desde [[Equals]]

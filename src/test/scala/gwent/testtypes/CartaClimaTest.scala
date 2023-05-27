@@ -5,6 +5,7 @@ import gwent.cartas.*
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
+import cl.uchile.dcc.gwent.Exceptions.InvalidTypeModStrengthException
 import munit.FunSuite
 
 class CartaClimaTest extends FunSuite{
@@ -45,14 +46,23 @@ class CartaClimaTest extends FunSuite{
     assert(!cartaem._name.equals(cartani._name))
   }
   test("La habilidad de una carta de clima solo afecta a la carta de unidad correspondiente"){
-    // Carta Niebla Impenetrable solo puede cambiar stats de carta Cuerpo a Cuerpo
-    cartani.mod_strength(cartacac)
-    assertEquals(cartacac._strength, expected = 5)
+    // Carta Niebla Impenetrable solo puede cambiar stats de carta Distancia
+    interceptMessage[InvalidTypeModStrengthException]("Carta Cuerpo a Cuerpo no puede ser afectada por Carta Niebla Impenetrable"){
+      cartani.mod_strength(cartacac) // NI intenta cambiar stats de Cuerpo a Cuerpo
+    }
+    assertEquals(cartacac._current_strength, expected = 5)
     cartaem.mod_strength(cartacac)
-    assertEquals(cartacac._strength, expected = 1)
+    assertEquals(cartacac._current_strength, expected = 1)
     cartani.mod_strength(cartadis)
-    assertEquals(cartadis._strength, expected = 1)
+    assertEquals(cartadis._current_strength, expected = 1)
     cartalt.mod_strength(cartaase)
-    assertEquals(cartaase._strength, expected = 1)
+    assertEquals(cartaase._current_strength, expected = 1)
+    // Carta Clima Despejado restaura los valores de fuerza originales de las cartas
+    cartacd.mod_strength(cartacac)
+    assertEquals(cartacac._current_strength, expected = 5)
+    cartacd.mod_strength(cartaase)
+    assertEquals(cartaase._current_strength, expected = 10)
+    cartacd.mod_strength(cartadis)
+    assertEquals(cartadis._current_strength, expected = 3)
   }
 }

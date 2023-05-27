@@ -3,6 +3,8 @@ package gwent.cartas.cartaclima
 
 import gwent.cartas.CartaUnidad
 
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+
 import java.util.Objects
 
 /** Una clase CartaLluviaTorrencial que genera una carta de lluvia torrencial, extendiendo a AbstractCartaClima
@@ -20,8 +22,7 @@ class CartaLluviaTorrencial(_name: String)
   * solo se hace para determinado tipo de carta de unidad
   */
   override def mod_strength(other: CartaUnidad): Unit = {
-    if (other.getClass.getSimpleName == "CartaAsedio")
-      other._current_strength = 1
+    other.get_mod_strength_lt(this)
   }
 
   /// Documentacion heredada desde [[Equals]]

@@ -32,8 +32,11 @@ trait Jugador {
   var handnum: Int
   var deck_list: DeckClass
   var hand_list: ListBuffer[Carta]
-
+  
   def isValidName(): Boolean
+  
+  def isValidGems(): Boolean
+  
   def del_gems(): Unit
 
   def first_take(): Unit

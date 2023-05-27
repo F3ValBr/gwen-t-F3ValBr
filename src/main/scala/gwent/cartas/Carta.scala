@@ -5,6 +5,8 @@ import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 
+import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+
 import javax.print.attribute.standard.MediaSize.Other
 
 /** Un trait que representa una Carta, este es el supertrait de las cartas
@@ -53,12 +55,14 @@ trait CartaUnidad extends Carta {
 
   // add_card_to agrega la carta a la zona del tablero correspondiente
   def add_card_to(tablero_zona: ZonaCartasCombate): Unit
-  
-  /*
-  def add_card_to_caczone(zonaCAC: ZonaCuerpoACuerpo): Unit
-  def add_card_to_asezone(zonaAse: ZonaAsedio): Unit
-  def add_card_to_diszone(zonaDis: ZonaDistancia): Unit
-  */
+
+  def get_mod_strength_em(other: CartaEscarchaMordiente): Unit
+
+  def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit
+
+  def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit
+
+  def get_mod_strength_cd(other: CartaClimaDespejado): Unit
 }
 
 /** Un trait donde una carta tiene una clasificacion CartaClima

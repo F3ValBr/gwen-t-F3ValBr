@@ -3,6 +3,8 @@ package gwent.cartas.cartaclima
 
 import gwent.cartas.CartaUnidad
 
+import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
+
 import java.util.Objects
 
 /** Una clase CartaNieblaImpenetrable que genera una carta de niebla impenetrable, extendiendo a AbstractCartaClima
@@ -21,8 +23,7 @@ class CartaNieblaImpenetrable(_name: String)
   * solo se hace para determinado tipo de carta de unidad
   */
   override def mod_strength(other: CartaUnidad): Unit = {
-    if (other.getClass.getSimpleName == "CartaDistancia")
-      other._current_strength = 1
+    other.get_mod_strength_ci(this)
   }
 
   /// Documentacion heredada desde [[Equals]]
