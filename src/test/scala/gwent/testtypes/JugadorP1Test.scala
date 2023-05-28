@@ -37,7 +37,7 @@ class JugadorP1Test extends FunSuite{
   }
   test("Un jugador tiene un nombre") {
     assertEquals(JugadorTu.getname(), expected = "Nombre generico") // Un jugador tiene un nombre dado
-    assert(!JugadorTu.getname().equals(JugadorYo.getname())) // Jugadores con nombres distintos
+    assertNotEquals(JugadorTu.getname(), JugadorYo.getname()) // Jugadores con nombres distintos
     assert(JugadorTu.getname().equals(JugadorTu.getname())) // Jugadores con nombres iguales
   }
   test("El jugador tiene una cantidad de gemas") {

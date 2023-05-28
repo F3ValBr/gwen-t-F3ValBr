@@ -17,6 +17,7 @@ class TableroTest extends munit.FunSuite{
   val card_dis = new CartaDistancia("dis_1", 5)
   val card_ase = new CartaAsedio("ase_1", 7)
   val card_cac = new CartaCuerpoACuerpo("cac_1", 9)
+  val cardcacx = new CartaCuerpoACuerpo("cac_x", 8)
 
   val card_em = new CartaEscarchaMordiente("em_1")
   val card_ni = new CartaNieblaImpenetrable("ni_1")
@@ -28,6 +29,64 @@ class TableroTest extends munit.FunSuite{
     zonaase = new ZonaAsedio()
     zonacac = new ZonaCuerpoACuerpo()
     zonaclima = new ZonaClima()
+  }
+
+  test("Creacion de una zona e igualdad con otra"){
+    val zonadis2 = new ZonaDistancia()
+    assert(zonadis == zonadis2)
+    assert(zonadis != zonaase)
+    zonadis2.add_card(card_dis)
+    zonadis.add_card(card_dis)
+    assert(zonadis == zonadis2)
+  }
+
+  test("El hashcode de una zona determinada es consistente con su correspondiente en equals"){
+    val zonacact = new ZonaCuerpoACuerpo()
+    zonacact.add_card(card_cac)
+    zonacac.add_card(card_cac)
+    assertEquals(zonacac.##, zonacact.##)
+
+    val zonadist = new ZonaDistancia()
+    zonadist.add_card(card_dis)
+    zonadis.add_card(card_dis)
+    assertEquals(zonadis.##, zonadist.##)
+
+    val zonaaset = new ZonaAsedio()
+    zonaaset.add_card(card_ase)
+    zonaase.add_card(card_ase)
+    assertEquals(zonaase.##, zonaaset.##)
+  }
+
+  test("Pueden haber dos zonas del mismo tipo con las mismas cartas"){
+    val zonadis2 = new ZonaDistancia()
+    val carddis2 = new CartaDistancia("dis_1", 5)
+    zonadis2.add_card(card_dis)
+    zonadis.add_card(card_dis)
+    assertEquals(zonadis, zonadis2)
+    zonadis2.add_card(carddis2)
+    assertNotEquals(zonadis, zonadis2)
+    zonadis.add_card(carddis2)
+    assertEquals(zonadis, zonadis2)
+
+    val zonaase2 = new ZonaAsedio()
+    val cardase2 = new CartaAsedio("ase_1", 7)
+    zonaase2.add_card(card_ase)
+    zonaase.add_card(card_ase)
+    assertEquals(zonaase, zonaase2)
+    zonaase2.add_card(cardase2)
+    assertNotEquals(zonaase, zonaase2)
+    zonaase.add_card(cardase2)
+    assertEquals(zonaase, zonaase2)
+
+    val zonacac2 = new ZonaCuerpoACuerpo()
+    val cardcac2 = new CartaCuerpoACuerpo("cac_1", 9)
+    zonacac2.add_card(card_cac)
+    zonacac.add_card(card_cac)
+    assertEquals(zonacac, zonacac2)
+    zonacac2.add_card(cardcac2)
+    assertNotEquals(zonacac, zonacac2)
+    zonacac.add_card(cardcac2)
+    assertEquals(zonacac, zonacac2)
   }
 
   test("Ver las cartas que hay en la zona de combate"){
