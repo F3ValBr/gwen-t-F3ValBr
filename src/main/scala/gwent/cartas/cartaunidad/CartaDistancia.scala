@@ -35,41 +35,57 @@ class CartaDistancia(_name: String,
 
   _current_strength = _strength
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede a la modificacion si existe una habilidad, y se hace la modificacion via gmod_pow_strength_distancia
   override def pow_strength_of(other: CartaUnidad): Unit = {
     if (this._ability.isDefined) {
       other.gmod_pow_strength_distancia(this)
     }
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // no se puede modificar la fuerza de una carta de distancia con una carta de asedio
   override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
     throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por Carta de Asedio")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // no se puede modificar la fuerza de una carta de distancia con una carta de cuerpo a cuerpo
   override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
     throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por Carta de Cuerpo a Cuerpo")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede la modificacion via power_modder
   override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
     power_modder(other, this)
   }
-  //#######################################################################
+
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede a añaadir la carta a la zona de cartas de combate de distancia
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
     tablero_zona.add_card_distancia(this)
   }
-  //#######################################################################
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // no se puede modificar la fuerza de una carta de distancia con una carta de clima de escarcha mordiente
   override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
     throw new InvalidTypeModStrengthException("Carta Distancia no puede ser afectada por Carta Escarcha Mordiente")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // no se puede modificar la fuerza de una carta de distancia con una carta de clima de lluvia torrencial
   override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
     throw new InvalidTypeModStrengthException("Carta Distancia no puede ser afectada por Carta Lluvia Torrencial")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede con la modificacion seteando en 1
   override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
     this._current_strength = 1
   }
 
+  //#######################################################################
 
   /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaDistancia]

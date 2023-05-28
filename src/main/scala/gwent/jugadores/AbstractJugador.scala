@@ -25,17 +25,25 @@ abstract class AbstractJugador(override val name: String,
                                var hand_list: ListBuffer[Carta])
   extends Jugador {
 
+  /** isValidName es el metodo para validar el nombre del jugador, el cual debe tener entre 4 y 20 caracteres 
+   * 
+   * @return true si el nombre es valido, false si no lo es
+   */
   override def isValidName(): Boolean = {
     if (name.length > 3 && name.length < 20) true
     else false
   }
 
+  /** isValidGems es el metodo para validar la cantidad de gemas del jugador, la cual debe ser entre 1 y 2 
+   * 
+   * @return true si la cantidad de gemas es valida, false si no lo es
+   */
   override def isValidGems(): Boolean = {
     if (gems > 0 && gems <= 2) true
     else false
   }
   
-  /** del_gems es el metodo para borrar gemas de un jugador, borrandolas de a uno*/
+  /** del_gems es el metodo para borrar gemas de un jugador, borrandolas de a uno */
   override def del_gems(): Unit = {
     if (gems > 0) {
       gems -= 1
@@ -51,7 +59,10 @@ abstract class AbstractJugador(override val name: String,
     }
   }
 
-  /** Metodo auxiliar para sacar cartas de una mano en juego */
+  /** Metodo auxiliar para sacar cartas de una mano en juego 
+   * 
+   * @param cards_take numero de cartas a sacar de la mano
+   */
   override def del_hand(cards_take: Int): Unit = {
     handnum -= cards_take
     for (i <- 1 to cards_take) { hand_list = hand_list.drop(1) }

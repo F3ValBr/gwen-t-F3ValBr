@@ -13,8 +13,8 @@ import java.util.Objects
 class CartaClimaDespejado(_name: String)
   extends AbstractCartaClima(_name) with Equals {
 
-  /** se sobreescribe la funcion mod_strength para modificar el valor de
-   * fuerza de una carta de unidad
+  /** Se sobreescribe la funcion mod_strength para modificar el valor de
+   * fuerza de una carta de unidad.
    * Esta funcion se encarga de setear la fuerza en el valor original que tenia
    * previo a ser afectado por una carta climatica de otro tipo
    */

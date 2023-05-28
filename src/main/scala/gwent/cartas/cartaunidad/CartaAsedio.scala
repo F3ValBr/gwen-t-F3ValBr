@@ -34,40 +34,55 @@ class CartaAsedio(_name: String,
     this(_name, _strength, None)
   }
 
-  //#######################################################################
-
+  // se asigna la fuerza actual de la carta a su fuerza base
   _current_strength = _strength
 
+  // Documentacion heredada desde [[CartaUnidad]]
   override def pow_strength_of(other: CartaUnidad): Unit = {
+    // si la habilidad esta definida, se procede a modificar la fuerza de la carta
     if (this._ability.isDefined) {
       other.gmod_pow_strength_asedio(this)
     }
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // una carta cuerpo a cuerpo no puede modificar a una de asedio
   override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
-    throw new InvalidTypeModStrengthException("Fuerza de Carta Asedio no puede ser modificada por de Carta Cuerpo a Cuerpo")
+    throw new InvalidTypeModStrengthException("Fuerza de Carta Asedio no puede ser modificada por Carta Cuerpo a Cuerpo")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // una carta cuerpo a cuerpo no puede modificar a una de distancia
   override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
-    throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por de Carta Cuerpo a Cuerpo")
+    throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por Carta Cuerpo a Cuerpo")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede con la modificacion al corresponder los tipos
   override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
     power_modder(other, this)
   }
-  
+
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede a añadir la carta via el metodo add_card de la zona de asedio
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
     tablero_zona.add_card_asedio(this)
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // no se puede modificar la fuerza de una carta de asedio con una carta de clima de escarcha mordiente
   override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
     throw new InvalidTypeModStrengthException("Carta Asedio no puede ser afectada por Carta Escarcha Mordiente")
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // se procede con la modificacion al corresponder los tipos
   override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
     this._current_strength = 1
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
+  // no se puede modificar la fuerza de una carta de asedio con una carta de clima de niebla impenetrable
   override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
     throw new InvalidTypeModStrengthException("Carta Aseido no puede ser afectada por Carta Niebla Impenetrable")
   }

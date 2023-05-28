@@ -16,9 +16,9 @@ import java.util.Objects
 class CartaLluviaTorrencial(_name: String)
   extends AbstractCartaClima(_name) with Equals {
 
-  /** se sobreescribe la funcion mod_strength para modificar el valor de
-  * fuerza de una carta de unidad
-  * se añade a la sobreescritura la condicion de que la modificacion de fuerza
+  /** Se sobreescribe la funcion mod_strength para modificar el valor de
+  * fuerza de una carta de unidad.
+  * Se añade a la sobreescritura la condicion de que la modificacion de fuerza
   * solo se hace para determinado tipo de carta de unidad
   */
   override def mod_strength(other: CartaUnidad): Unit = {

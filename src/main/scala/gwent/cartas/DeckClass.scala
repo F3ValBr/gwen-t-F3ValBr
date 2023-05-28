@@ -49,33 +49,49 @@ class DeckClass(var _deck: ListBuffer[Carta]) extends Deck with Equals {
       new CartaClimaDespejado("7")))
 
 
-  // isValidDeck retorna true si el deck es valido
+  /** isValidDeck retorna true si el deck es valido
+   * 
+   * @return true si el deck es valido, false en caso contrario
+   */
   override def isValidDeck(): Boolean = {
     if (_deck.size == 25 && _deck.distinct.size == _deck.size) true
     else false
   }
 
-  // cant_cards retorna la cantidad de cartas en el deck
+  /** cant_cards retorna la cantidad de cartas en el deck
+   * 
+   * @return cantidad de cartas en el deck
+   */
   override def cant_cards(): Int = _deck.length
 
-  // shuffle_deck mezcla el deck
+  /** shuffle_deck mezcla el deck de cartas
+   */
   override def shuffle_deck(): Unit = {
     _deck = scala.util.Random.shuffle(_deck)
   }
 
-  // draw_card saca una carta del deck
+  /** draw_card saca una carta del deck
+   * 
+   * @return carta sacada del deck
+   */
   override def draw_card(): Carta = {
     val carta = _deck.head
     _deck = _deck.tail
     carta
   }
 
-  // add_card agrega una carta al deck
+  /** add_card agrega una carta al deck
+   * 
+   * @param card carta a agregar al deck
+   */
   override def add_card(card: Carta): Unit = {
     _deck = _deck :+ card
   }
 
-  // remove_card elimina una carta del deck
+  /** remove_card elimina una carta del deck
+   * 
+   * @param card carta a eliminar del deck
+   */
   override def remove_card(card: Carta): Unit = {
     _deck = _deck.filter(_ != card)
   }
