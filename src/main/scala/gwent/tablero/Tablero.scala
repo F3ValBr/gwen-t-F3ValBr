@@ -95,5 +95,5 @@ trait ZonaCartasClima extends Tablero {
   /** replace_clima reemplaza la carta de clima en la zona
    * @param carta carta de clima a reemplazar
    */
-  def replace_clima(carta: CartaClima): Unit
+  protected def replace_clima(carta: CartaClima): Unit
 }
