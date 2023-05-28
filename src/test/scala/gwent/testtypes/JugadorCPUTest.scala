@@ -40,35 +40,35 @@ class JugadorCPUTest extends FunSuite {
     assert(new JugadorCPU("Computador").equals(JugadorPC))
   }
   test("Un jugador tiene un nombre") {
-    assertEquals(JugadorPC.name, expected = "Computador") // Un jugador tiene un nombre dado
-    assert(!JugadorPC.name.equals(JugadorIA.name)) // Jugadores con nombres distintos
-    assert(JugadorPC.name.equals(JugadorPC.name)) // Jugadores con nombres iguales
-    assertNotEquals(JugadorPC.name, JugadorIA.name) // Un jugador tiene un nombre dado
+    assertEquals(JugadorPC.getname(), expected = "Computador") // Un jugador tiene un nombre dado
+    assert(!JugadorPC.getname().equals(JugadorIA.getname())) // Jugadores con nombres distintos
+    assert(JugadorPC.getname().equals(JugadorPC.getname())) // Jugadores con nombres iguales
+    assertNotEquals(JugadorPC.getname(), JugadorIA.getname()) // Un jugador tiene un nombre dado
   }
   test("El jugador tiene una cantidad de gemas") {
-    assertEquals(JugadorIA.gems, expected = 2) // el jugadorIA tiene 2 gemas
-    assert(JugadorIA.gems < new JugadorCPU("J5", 5, 1).gems, "JugadorIA tiene menos gemas que el jugador nuevo") // las gemas de 1 son mas que las de 2
+    assertEquals(JugadorIA.getgems(), expected = 2) // el jugadorIA tiene 2 gemas
+    assert(JugadorIA.getgems() < new JugadorCPU("J5", 5, 1).gems, "JugadorIA tiene menos gemas que el jugador nuevo") // las gemas de 1 son mas que las de 2
   }
   test("Jugador tiene un mazo de cartas") {
     // El jugadorPC parte con 25 cartas en su mazo
-    assertEquals(JugadorPC.deck_list.cant_cards(), expected = 25)
+    assertEquals(JugadorPC.getdeck().cant_cards(), expected = 25)
     assertEquals(JugadorPC.decknum, expected = 25)
 
     JugadorPC.first_take()
     // El JPC saca 10 cartas iniciales, quedando 15 en su mazo
     assertEquals(JugadorPC.decknum, expected = 15)
-    assertEquals(JugadorPC.deck_list.cant_cards(), expected = 15)
-    assertEquals(JugadorPC.hand_list.length, expected = 10)
-    assertEquals(JugadorPC.handnum, JugadorPC.hand_list.length)
+    assertEquals(JugadorPC.getdeck().cant_cards(), expected = 15)
+    assertEquals(JugadorPC.gethand().length, expected = 10)
+    assertEquals(JugadorPC.handnum, JugadorPC.gethand().length)
 
     JugadorPC.del_hand(5)
     JugadorPC.take_cards_deck()
     JugadorPC.take_cards_deck()
     // El J2 saca 5 cartas de su mano, luego toma cartas hasta tener 10 en su mano, quedando 10 en su mazo
     assertEquals(JugadorPC.decknum, expected = 10)
-    assertEquals(JugadorPC.deck_list.cant_cards(), expected = 10)
-    assertEquals(JugadorPC.hand_list.length, expected = 10)
-    assertEquals(JugadorPC.handnum, JugadorPC.hand_list.length)
+    assertEquals(JugadorPC.getdeck().cant_cards(), expected = 10)
+    assertEquals(JugadorPC.gethand().length, expected = 10)
+    assertEquals(JugadorPC.handnum, JugadorPC.gethand().length)
 
   }
   test("Verifica que un jugador tiene un deck invalido") {
@@ -79,11 +79,11 @@ class JugadorCPUTest extends FunSuite {
   }
   test("Jugador tiene su propia mano de cartas") {
     assertEquals(JugadorPC.handnum, expected = 0)
-    assertEquals(JugadorPC.hand_list.length, expected = 0)
+    assertEquals(JugadorPC.gethand().length, expected = 0)
     JugadorPC.first_take()
     // el J1 toma 10 cartas iniciales
     assertEquals(JugadorPC.handnum, expected = 10)
-    assertEquals(JugadorPC.hand_list.length, expected = 10)
+    assertEquals(JugadorPC.gethand().length, expected = 10)
   }
   test("Un jugador tiene todos sus atributos definidos") {
     assertEquals(new JugadorP1("JugadorDFA", 4), new JugadorP1("JugadorDFA", 4))
@@ -91,10 +91,10 @@ class JugadorCPUTest extends FunSuite {
   }
   test("El jugador puede perder gemas") {
     JugadorPC.del_gems() // quitar 1 gema, queda 1
-    assertEquals(JugadorPC.gems, expected = 1)
+    assertEquals(JugadorPC.getgems(), expected = 1)
     JugadorPC.del_gems() // quitar 1 gema, quedan 0
     JugadorPC.del_gems() // quitar otra gema, debe seguir en 0
-    assertEquals(JugadorPC.gems, expected = 0)
+    assertEquals(JugadorPC.getgems(), expected = 0)
   }
   test("El hashcode de un jugador es consistente con Equals") {
     assertEquals(new JugadorCPU("Computador").##, JugadorPC.##)

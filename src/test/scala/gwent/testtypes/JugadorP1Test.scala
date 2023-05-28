@@ -36,34 +36,34 @@ class JugadorP1Test extends FunSuite{
     assertEquals(JugadorTu, JugadorTu)
   }
   test("Un jugador tiene un nombre") {
-    assertEquals(JugadorTu.name, expected = "Nombre generico") // Un jugador tiene un nombre dado
-    assert(!JugadorTu.name.equals(JugadorYo.name)) // Jugadores con nombres distintos
-    assert(JugadorTu.name.equals(JugadorTu.name)) // Jugadores con nombres iguales
+    assertEquals(JugadorTu.getname(), expected = "Nombre generico") // Un jugador tiene un nombre dado
+    assert(!JugadorTu.getname().equals(JugadorYo.getname())) // Jugadores con nombres distintos
+    assert(JugadorTu.getname().equals(JugadorTu.getname())) // Jugadores con nombres iguales
   }
   test("El jugador tiene una cantidad de gemas") {
-    assertEquals(JugadorTu.gems, expected = 2) // el jugador 1 tiene 3 gemas
-    assert(JugadorTu.gems < new JugadorP1("J5", 5, 1).gems, "JugadorTu tiene menos gemas que el jugador nuevo") // las gemas de 1 son mas que las de 2
+    assertEquals(JugadorTu.getgems(), expected = 2) // el jugador 1 tiene 3 gemas
+    assert(JugadorTu.getgems() < new JugadorP1("J5", 5, 1).gems, "JugadorTu tiene menos gemas que el jugador nuevo") // las gemas de 1 son mas que las de 2
   }
   test("Jugador tiene un mazo de cartas") {
     // El JugadorYo parte con 25 cartas en su mazo
-    assertEquals(JugadorYo.deck_list.cant_cards(), expected = 25)
+    assertEquals(JugadorYo.getdeck().cant_cards(), expected = 25)
     assertEquals(JugadorYo.decknum, expected = 25)
 
     JugadorYo.first_take()
     // El JYo saca 10 cartas iniciales, quedando 15 en su mazo
     assertEquals(JugadorYo.decknum, expected = 15)
-    assertEquals(JugadorYo.deck_list.cant_cards(), expected = 15)
-    assertEquals(JugadorYo.hand_list.length, expected = 10)
-    assertEquals(JugadorYo.handnum, JugadorYo.hand_list.length)
+    assertEquals(JugadorYo.getdeck().cant_cards(), expected = 15)
+    assertEquals(JugadorYo.gethand().length, expected = 10)
+    assertEquals(JugadorYo.handnum, JugadorYo.gethand().length)
 
     JugadorYo.del_hand(5)
     JugadorYo.take_cards_deck()
     JugadorYo.take_cards_deck()
     // El JugadorYo saca 5 cartas de su mano, luego toma cartas del mazo hasta llegar a 10
     assertEquals(JugadorYo.decknum, expected = 10) // El J2 saca 5 cartas del mazo, quedando 10 en su mazo
-    assertEquals(JugadorYo.deck_list.cant_cards(), expected = 10) // El J2 saca 5 cartas del mazo, quedando 10 en su mazo
+    assertEquals(JugadorYo.getdeck().cant_cards(), expected = 10) // El J2 saca 5 cartas del mazo, quedando 10 en su mazo
     assertEquals(JugadorYo.handnum, expected = 10) // El J2 saca 5 cartas del mazo, quedando 10 en su mano
-    assertEquals(JugadorYo.hand_list.length, expected = 10) // El J2 saca 5 cartas del mazo, quedando 10 en su mano
+    assertEquals(JugadorYo.gethand().length, expected = 10) // El J2 saca 5 cartas del mazo, quedando 10 en su mano
   }
   test("Jugador tiene su propia mano de cartas") {
     assertEquals(JugadorYo.handnum, expected = 0)
@@ -80,10 +80,10 @@ class JugadorP1Test extends FunSuite{
   }
   test("El jugador puede perder gemas") {
     JugadorYo.del_gems() // quitar 1 gema, queda 1
-    assertEquals(JugadorYo.gems, expected = 1)
+    assertEquals(JugadorYo.getgems(), expected = 1)
     JugadorYo.del_gems() // quitar 1 gema, quedan 0
     JugadorYo.del_gems() // quitar otra gema, debe seguir en 0
-    assertEquals(JugadorYo.gems, expected = 0)
+    assertEquals(JugadorYo.getgems(), expected = 0)
   }
   test("El hashcode de un jugador es consistente con Equals") {
     assertEquals(new JugadorP1("Nombre generico").##, JugadorTu.##)

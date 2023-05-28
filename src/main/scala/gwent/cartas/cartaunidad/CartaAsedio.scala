@@ -36,6 +36,11 @@ class CartaAsedio(_name: String,
 
   // se asigna la fuerza actual de la carta a su fuerza base
   _current_strength = _strength
+  curr_strength = _current_strength
+
+
+  // se asigna la habilidad protegida de la carta a un getter
+  ability = _ability
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def pow_strength_of(other: CartaUnidad): Unit = {

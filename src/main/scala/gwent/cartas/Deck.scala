@@ -8,11 +8,17 @@ import scala.collection.mutable.ListBuffer
  * @param deck es una lista de cartas que representa el deck.
  *
  * Se define un trait Deck que contiene los siguientes métodos:
+ * 
  * isValidDeck verifica que el deck sea válido.
+ * 
  * cant_cards retorna la cantidad de cartas en el deck.
+ * 
  * shuffle_deck mezcla el deck.
+ * 
  * draw_card saca una carta del deck.
+ * 
  * add_card agrega una carta al deck.
+ * 
  * remove_card elimina una carta del deck.
  */
 trait Deck {
@@ -28,11 +34,11 @@ trait Deck {
   def shuffle_deck(): Unit
 
   // draw_card saca una carta del deck
-  def draw_card(): Carta
+  protected def draw_card(): Carta
 
   // add_card agrega una carta al deck
-  def add_card(card: Carta): Unit
+  protected def add_card(card: Carta): Unit
 
   // remove_card elimina una carta del deck
-  def remove_card(card: Carta): Unit
+  protected def remove_card(card: Carta): Unit
 }

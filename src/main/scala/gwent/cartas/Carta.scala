@@ -21,7 +21,14 @@ import javax.print.attribute.standard.MediaSize.Other
  */
 trait Carta {
   // nombre de una carta
-  val _name: String
+  protected val _name: String
+  var name: String
+
+  /** getname devuelve el nombre de una carta
+   *
+   * @return nombre de una carta
+   */
+  def getname(): String
 }
 
 /** Un trait donde una carta tiene una clasificacion CartaUnidad
@@ -39,9 +46,26 @@ trait CartaUnidad extends Carta {
 
   // valor actual de la fuerza de una carta en el juego
   var _current_strength: Int
+  var curr_strength: Int
 
   // habilidad que puede o no tener una carta de unidad
-  val _ability: Option[String]
+  protected val _ability: Option[String]
+
+  // habilidad que puede o no tener una carta de unidad
+  var ability: Option[String]
+
+  // Definicion de getters
+  /** getstrength devuelve el valor de fuerza de una carta de unidad
+   *
+   * @return valor de fuerza de una carta de unidad
+   */
+  def getcurrentstrength(): Int
+
+  /** getability devuelve la habilidad de una carta de unidad
+   *
+   * @return habilidad de una carta de unidad
+   */
+  def getability(): Option[String]
 
   /** pow_strength_of aumenta el valor de fuerza de una carta de unidad
    *
@@ -50,25 +74,25 @@ trait CartaUnidad extends Carta {
   def pow_strength_of(other: CartaUnidad): Unit
 
   /** validCartaUnidad verifica si una carta cumple con ciertos parametros de CartaUnidad
-   * 
+   *
    * @return true si la carta cumple con los parametros de CartaUnidad, false en caso contrario
    */
   def validCartaUnidad(): Boolean
 
   /** gmod_pow_strength_asedio modifica el valor de fuerza de una carta de asedio
-   * 
+   *
    * @param other carta de asedio que aumenta su valor de fuerza
    */
   def gmod_pow_strength_asedio(other: CartaAsedio): Unit
 
   /** gmod_pow_strength_distancia modifica el valor de fuerza de una carta de distancia
-   * 
+   *
    * @param other carta de distancia que aumenta su valor de fuerza
    */
   def gmod_pow_strength_distancia(other: CartaDistancia): Unit
 
   /** gmod_pow_strength_cuerpoacuerpo modifica el valor de fuerza de una carta de cuerpo a cuerpo
-   * 
+   *
    * @param other carta de cuerpo a cuerpo que aumenta su valor de fuerza
    */
   def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit
@@ -83,32 +107,32 @@ trait CartaUnidad extends Carta {
   protected def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit
 
   /** add_card_to agrega la carta a la zona del tablero correspondiente
-   * 
+   *
    * @param tablero_zona zona del tablero donde se agrega la carta
    */
   def add_card_to(tablero_zona: ZonaCartasCombate): Unit
 
   /** get_mod_strength_em modifica el valor de fuerza de una carta de unidad, dada una carta de clima EscarchaMordiente
-   * 
+   *
    * @param other carta de clima EscarchaMordiente
    */
   def get_mod_strength_em(other: CartaEscarchaMordiente): Unit
 
   /** get_mod_strength_lt modifica el valor de fuerza de una carta de unidad, dada una carta de clima LluviaTorrencial
-   * 
+   *
    * @param other carta de clima LluviaTorrencial
    */
   def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit
 
   /** get_mod_strength_ci modifica el valor de fuerza de una carta de unidad, dada una carta de clima NieblaImpenetrable
-   * 
+   *
    * @param other carta de clima NieblaImpenetrable
    */
   def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit
 
   /** get_mod_strength_cd modifica el valor de fuerza de una carta de unidad, dada una carta de Clima Despejado.
    * Este metodo devuelve el valor original de fuerza de la carta de unidad
-   * 
+   *
    * @param other carta de clima Despejado
    */
   def get_mod_strength_cd(other: CartaClimaDespejado): Unit
@@ -121,7 +145,7 @@ trait CartaUnidad extends Carta {
  */
 trait CartaClima extends Carta {
   /** mod_strength modifica el valor de fuerza de una carta de unidad
-   * 
+   *
    * @param other carta de unidad que tiene su valor de fuerza modificado
    */
   def mod_strength(other: CartaUnidad): Unit

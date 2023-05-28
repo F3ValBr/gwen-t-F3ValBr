@@ -42,21 +42,21 @@ class CartaClimaTest extends FunSuite{
   }
 
   test("Una carta de clima tiene un nombre definido, distinto de otras cartas"){
-    assertEquals(cartacd._name, expected = "Dia soleado")
-    assert(!cartaem._name.equals(cartani._name))
+    assertEquals(cartacd.getname(), expected = "Dia soleado")
+    assert(!cartaem.getname().equals(cartani.getname()))
   }
   test("La habilidad de una carta de clima solo afecta a la carta de unidad correspondiente"){
     // Carta Niebla Impenetrable solo puede cambiar stats de carta Distancia
     interceptMessage[InvalidTypeModStrengthException]("Carta Cuerpo a Cuerpo no puede ser afectada por Carta Niebla Impenetrable"){
       cartani.mod_strength(cartacac) // NI intenta cambiar stats de Cuerpo a Cuerpo
     }
-    assertEquals(cartacac._current_strength, expected = 5)
+    assertEquals(cartacac.getcurrentstrength(), expected = 5)
     interceptMessage[InvalidTypeModStrengthException]("Carta Aseido no puede ser afectada por Carta Niebla Impenetrable"){
       cartani.mod_strength(cartaase) // NI intenta cambiar stats de Asedio
     }
-    assertEquals(cartaase._current_strength, expected = 10)
+    assertEquals(cartaase.getcurrentstrength(), expected = 10)
     cartani.mod_strength(cartadis)
-    assertEquals(cartadis._current_strength, expected = 1)
+    assertEquals(cartadis.getcurrentstrength(), expected = 1)
 
     // Carta Lluvia Torrencial solo puede cambiar stats de carta Asedio
     interceptMessage[InvalidTypeModStrengthException]("Carta Cuerpo a Cuerpo no puede ser afectada por Carta Lluvia Torrencial"){
@@ -66,7 +66,7 @@ class CartaClimaTest extends FunSuite{
       cartalt.mod_strength(cartadis) // LT intenta cambiar stats de Distancia
     }
     cartalt.mod_strength(cartaase)
-    assertEquals(cartaase._current_strength, expected = 1)
+    assertEquals(cartaase.getcurrentstrength(), expected = 1)
 
     // Carta Escarcha Mordiente solo puede cambiar stats de carta Cuerpo a Cuerpo
     interceptMessage[InvalidTypeModStrengthException]("Carta Asedio no puede ser afectada por Carta Escarcha Mordiente"){
@@ -76,14 +76,14 @@ class CartaClimaTest extends FunSuite{
       cartaem.mod_strength(cartadis) // EM intenta cambiar stats de Distancia
     }
     cartaem.mod_strength(cartacac)
-    assertEquals(cartacac._current_strength, expected = 1)
+    assertEquals(cartacac.getcurrentstrength(), expected = 1)
 
     // Carta Clima Despejado restaura los valores de fuerza originales de las cartas
     cartacd.mod_strength(cartacac)
-    assertEquals(cartacac._current_strength, expected = 5)
+    assertEquals(cartacac.getcurrentstrength(), expected = 5)
     cartacd.mod_strength(cartaase)
-    assertEquals(cartaase._current_strength, expected = 10)
+    assertEquals(cartaase.getcurrentstrength(), expected = 10)
     cartacd.mod_strength(cartadis)
-    assertEquals(cartadis._current_strength, expected = 3)
+    assertEquals(cartadis.getcurrentstrength(), expected = 3)
   }
 }

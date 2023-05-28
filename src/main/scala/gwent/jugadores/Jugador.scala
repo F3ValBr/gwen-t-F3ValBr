@@ -26,22 +26,36 @@ import scala.collection.mutable.ListBuffer
  * @since 1.0
  * */
 trait Jugador {
-  val name: String
-  var gems: Int
+  protected val _name: String
+  protected var _gems: Int
+
   var decknum: Int
   var handnum: Int
+
+  protected var _deck_list: DeckClass
+  protected var _hand_list: ListBuffer[Carta]
+
+  val name: String
+  var gems: Int
+
   var deck_list: DeckClass
   var hand_list: ListBuffer[Carta]
   
+  // Definicion de getters
+  def getname(): String
+  def getgems(): Int
+  def getdeck(): DeckClass
+  def gethand(): ListBuffer[Carta]
+
   def isValidName(): Boolean
   
   def isValidGems(): Boolean
   
-  def del_gems(): Unit
+  protected def del_gems(): Unit
 
-  def first_take(): Unit
+  protected def first_take(): Unit
 
-  def del_hand(cards_take: Int): Unit
+  protected def del_hand(cards_take: Int): Unit
 
-  def take_cards_deck(): Unit
+  protected def take_cards_deck(): Unit
 }

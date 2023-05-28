@@ -30,6 +30,20 @@ class TableroTest extends munit.FunSuite{
     zonaclima = new ZonaClima()
   }
 
+  test("Ver las cartas que hay en la zona de combate"){
+    assert(zonadis.cartas_zona_in.isEmpty)
+    zonadis.add_card(card_dis)
+    assert(zonadis.cartas_zona_in.contains(card_dis))
+    val things_in = zonadis.viewZone()
+    assert(things_in.contains(card_dis))
+  }
+  test("Ver la carta disponible en la zona de clima"){
+    assertEquals(zonaclima.cartas_clima_in, CartaClimaDespejado("Init"))
+    zonaclima.replace_clima(card_em)
+    assert(zonaclima.cartas_clima_in == card_em)
+    val things_in = zonaclima.viewZone()
+    assertEquals(things_in, card_em)
+  }
   // Tests por cada zona de combate
   test("Una zona puede añadir cartas y despues limpiar la zona"){
     assert(zonadis.cartas_zona_in.isEmpty)

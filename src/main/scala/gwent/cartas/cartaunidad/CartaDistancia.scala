@@ -33,7 +33,12 @@ class CartaDistancia(_name: String,
     this(_name, _strength, None)
   }
 
+  // se asigna la fuerza actual de la carta a su fuerza base
   _current_strength = _strength
+  curr_strength = _current_strength
+
+  // se asigna la habilidad protegida de la carta a un getter
+  ability = _ability
 
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede a la modificacion si existe una habilidad, y se hace la modificacion via gmod_pow_strength_distancia

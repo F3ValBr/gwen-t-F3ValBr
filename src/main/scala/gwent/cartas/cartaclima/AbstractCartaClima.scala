@@ -10,4 +10,14 @@ import gwent.cartas.{CartaClima, CartaUnidad}
  */
 
 abstract class AbstractCartaClima(override val _name: String)
-  extends CartaClima
+  extends CartaClima {
+
+  var name: String = _name
+  
+  // Documentacion heredada desde Carta
+  override def getname(): String = {
+    name = _name
+    name
+  }
+  
+}

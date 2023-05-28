@@ -10,43 +10,69 @@ import scala.collection.mutable.ListBuffer
  * @constructor AbstractJugador cre un jugador con un nombre, una cantidad de gemas, un mazo y una mano de cartas
  *              con las cuales puede jugar, ademas de definir los metodos del_gems, first_take, del_hand y take_cards_deck
  *              definidos mas abajp
- * @param name Nombre del jugador
- * @param gems cantidad de vida en juego, representado como cantidad de gemas
+ * @param _name Nombre del jugador
+ * @param _gems cantidad de vida en juego, representado como cantidad de gemas
  * @param decknum cartas disponibles a robar del mazo
  * @param handnum cartas disponibles a jugar en la mano del jugador
- * @param deck_list lista de cartas del mazo
- * @param hand_list lista de cartas en la mano
+ * @param _deck_list lista de cartas del mazo
+ * @param _hand_list lista de cartas en la mano
  */
-abstract class AbstractJugador(override val name: String,
-                               var gems: Int,
+abstract class AbstractJugador(override val _name: String,
+                               var _gems: Int,
                                var decknum: Int,
                                var handnum: Int,
-                               var deck_list: DeckClass,
-                               var hand_list: ListBuffer[Carta])
+                               var _deck_list: DeckClass,
+                               var _hand_list: ListBuffer[Carta])
   extends Jugador {
 
-  /** isValidName es el metodo para validar el nombre del jugador, el cual debe tener entre 4 y 20 caracteres 
-   * 
+  // Se asignan nombre y gemas protegidas a las variables publicas
+  override val name: String = _name
+  var gems: Int = _gems
+
+  var deck_list: DeckClass = _deck_list
+  var hand_list: ListBuffer[Carta] = _hand_list.clone()
+
+  override def getname(): String = {
+    name
+  }
+  
+  override def getgems(): Int = {
+    gems = _gems
+    gems
+  }
+  
+  override def getdeck(): DeckClass = {
+    deck_list = _deck_list
+    deck_list
+  }
+  
+  override def gethand(): ListBuffer[Carta] = {
+    hand_list = _hand_list.clone()
+    hand_list
+  }
+
+  /** isValidName es el metodo para validar el nombre del jugador, el cual debe tener entre 4 y 20 caracteres
+   *
    * @return true si el nombre es valido, false si no lo es
    */
   override def isValidName(): Boolean = {
-    if (name.length > 3 && name.length < 20) true
+    if (_name.length > 3 && _name.length < 20) true
     else false
   }
 
-  /** isValidGems es el metodo para validar la cantidad de gemas del jugador, la cual debe ser entre 1 y 2 
-   * 
+  /** isValidGems es el metodo para validar la cantidad de gemas del jugador, la cual debe ser entre 1 y 2
+   *
    * @return true si la cantidad de gemas es valida, false si no lo es
    */
   override def isValidGems(): Boolean = {
-    if (gems > 0 && gems <= 2) true
+    if (_gems > 0 && _gems <= 2) true
     else false
   }
   
   /** del_gems es el metodo para borrar gemas de un jugador, borrandolas de a uno */
   override def del_gems(): Unit = {
-    if (gems > 0) {
-      gems -= 1
+    if (_gems > 0) {
+      _gems -= 1
     }
   }
 
@@ -55,17 +81,17 @@ abstract class AbstractJugador(override val name: String,
     if (decknum > 0) {
       decknum -= 10
       handnum += 10
-      for (i <- 1 to 10) { hand_list = hand_list :+ deck_list.draw_card() }
+      for (i <- 1 to 10) { _hand_list = _hand_list :+ _deck_list.draw_card() }
     }
   }
 
-  /** Metodo auxiliar para sacar cartas de una mano en juego 
-   * 
+  /** Metodo auxiliar para sacar cartas de una mano en juego
+   *
    * @param cards_take numero de cartas a sacar de la mano
    */
   override def del_hand(cards_take: Int): Unit = {
     handnum -= cards_take
-    for (i <- 1 to cards_take) { hand_list = hand_list.drop(1) }
+    for (i <- 1 to cards_take) { _hand_list = _hand_list.drop(1) }
   }
 
   /** tomar_cartas_mazo permite al jugador sacar un numero determinado de cartas y anadirlas a su mano */
@@ -74,13 +100,13 @@ abstract class AbstractJugador(override val name: String,
     if (handnum <= 7 && decknum > 0) {
       decknum -= 3
       handnum += 3
-      for (i <- 1 to 3) { hand_list = hand_list :+ deck_list.draw_card() }
+      for (i <- 1 to 3) { _hand_list = _hand_list :+ _deck_list.draw_card() }
     // si hay mas de 7 cartas en la mano, se rellena con lo que reste para llegar a 10
     } else if (handnum > 7 && decknum > 0) {
       val leftover: Int = 10 - handnum
       decknum -= leftover
       handnum += leftover
-      for (i <- 1 to leftover) { hand_list = hand_list :+ deck_list.draw_card() }
+      for (i <- 1 to leftover) { _hand_list = _hand_list :+ _deck_list.draw_card() }
     }
   }
 }

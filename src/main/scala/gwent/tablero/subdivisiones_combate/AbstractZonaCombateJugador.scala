@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.tablero.subdivisiones_combate
 
-import gwent.cartas.CartaUnidad
+import gwent.cartas.{Carta, CartaUnidad}
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 
@@ -12,6 +12,13 @@ import scala.collection.mutable.ListBuffer
   * @param cartas_zona_in Lista de cartas que se encuentran en la zona.
   */
 abstract class AbstractZonaCombateJugador(var cartas_zona_in: ListBuffer[CartaUnidad]) extends ZonaCartasCombate{
+
+  var cards_in: ListBuffer[CartaUnidad] = cartas_zona_in.clone()
+
+  override def viewZone(): ListBuffer[CartaUnidad] = {
+    cards_in = cartas_zona_in.clone()
+    cards_in
+  }
 
   // Documentacion en el trait ZonaCartasCombate
   // Para este caso se reinicia la zona de combate del jugador con una lista vacia

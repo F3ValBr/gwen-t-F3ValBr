@@ -20,6 +20,12 @@ abstract class AbstractCartaUnidad(override val _name: String,
 
   var _current_strength: Int = _strength
 
+  var curr_strength: Int = _current_strength
+
+  var ability: Option[String] = _ability
+
+  var name: String = _name
+
   // los siguientes valores son para simplificar la evaluacion de algunos metodos en cada carta
   val rm = "Refuerzo Moral"
   val ve = "Vinculo Estrecho"
@@ -27,6 +33,20 @@ abstract class AbstractCartaUnidad(override val _name: String,
   val carddis = "CartaDistancia"
   val cardcac = "CartaCuerpoACuerpo"
   val cardase = "CartaAsedio"
+
+  override def getname(): String = {
+    name = _name
+    name
+  }
+
+  override def getcurrentstrength(): Int = {
+    curr_strength = _current_strength
+    curr_strength
+  }
+
+  override def getability(): Option[String] = {
+    ability
+  }
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def validCartaUnidad(): Boolean = {
@@ -38,12 +58,12 @@ abstract class AbstractCartaUnidad(override val _name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
     // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
-    if (card_modifier._ability.get == rm) {
+    if (card_modifier.getability().get == rm) {
       card_modified._current_strength += 1
     }
     // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
     // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
-    else if (card_modifier._ability.get == ve && card_modified._name == card_modifier._name) {
+    else if (card_modifier.getability().get == ve && card_modified.getname() == card_modifier.getname()) {
       card_modified._current_strength *= 2
       card_modifier._current_strength *= 2
     }

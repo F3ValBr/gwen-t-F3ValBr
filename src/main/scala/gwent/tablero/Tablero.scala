@@ -10,13 +10,13 @@ import scala.collection.mutable.ListBuffer
 /** Tablero de juego de Gwent
  *
  * @constructor crea un tablero de juego de Gwent con las zonas de cartas de combate y clima
- *              
+ *
  * @author Felipe Valdebenito Bravo
  * @version 1.0
  * @since 1.0
  */
 trait Tablero {
-  
+
   /** clean_zone limpia la zona de cartas respectiva */
   def clean_zone(): Unit
 }
@@ -27,19 +27,28 @@ trait Tablero {
  * @param cartas_zona_in lista de cartas de combate en la zona
  */
 trait ZonaCartasCombate extends Tablero {
-  
+
   // Lista de cartas de combate en la zona
-  var cartas_zona_in: ListBuffer[CartaUnidad]
+  protected var cartas_zona_in: ListBuffer[CartaUnidad]
+
+  // Lista de cartas de combate en la zona
+  var cards_in: ListBuffer[CartaUnidad]
+
+  /** viewZone muestra la zona de cartas respectiva
+   *
+   * @return lista de cartas de la zona en cuestion
+   */
+  def viewZone(): ListBuffer[CartaUnidad]
 
   /** counter_strength calcula la fuerza total de la zona
    * @return fuerza total de la zona
    */
-  def counter_strength(): Int
+  protected def counter_strength(): Int
 
   /** add_card agrega una carta a la zona
    * @param carta carta a agregar
    */
-  def add_card(carta: CartaUnidad): Unit
+  protected def add_card(carta: CartaUnidad): Unit
 
   /** add_card_asedio agrega una carta a la zona de asedio
    * @param card carta a agregar
@@ -56,11 +65,11 @@ trait ZonaCartasCombate extends Tablero {
    */
   def add_card_distancia(card: CartaUnidad): Unit
 
-  /** card_adder es el metodo auxiliar para añadir una carta a una lista dada 
+  /** card_adder es el metodo auxiliar para añadir una carta a una lista dada
    * @param list_of_cards lista de cartas a la que se le agregara la carta
    * @param card carta a agregar
    */
-  def card_adder(list_of_cards: ListBuffer[CartaUnidad], card: CartaUnidad): Unit
+  protected def card_adder(list_of_cards: ListBuffer[CartaUnidad], card: CartaUnidad): Unit
 }
 
 /** ZonaCartasClima es una zona del tablero de juego de Gwent
@@ -72,7 +81,16 @@ trait ZonaCartasCombate extends Tablero {
 trait ZonaCartasClima extends Tablero {
 
   // Carta de clima en la zona
-  var cartas_clima_in: CartaClima
+  protected var cartas_clima_in: CartaClima
+
+  // Carta de clima en la zona
+  var card_in: CartaClima
+
+  /** viewZone muestra la zona de cartas respectiva
+   *
+   * @return lista de cartas de la zona en cuestion
+   */
+  def viewZone(): CartaClima
 
   /** replace_clima reemplaza la carta de clima en la zona
    * @param carta carta de clima a reemplazar

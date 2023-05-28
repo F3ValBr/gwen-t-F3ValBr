@@ -34,7 +34,12 @@ class CartaCuerpoACuerpo(_name: String,
     this(_name, _strength, None)
   }
 
+  // se asigna la fuerza actual de la carta a su fuerza base
   _current_strength = _strength
+  curr_strength = _current_strength
+
+  // se asigna la habilidad protegida de la carta a un getter
+  ability = _ability
 
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede a añadir la carta via el metodo add_card_cuerpo_a_cuerpo
@@ -85,7 +90,7 @@ class CartaCuerpoACuerpo(_name: String,
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {
     tablero_zona.add_card_cuerpo_a_cuerpo(this)
   }
-  
+
   //#######################################################################
 
   /// Documentacion heredada desde [[Equals]]
