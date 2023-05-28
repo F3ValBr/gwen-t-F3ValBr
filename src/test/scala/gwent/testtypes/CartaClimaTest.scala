@@ -51,12 +51,33 @@ class CartaClimaTest extends FunSuite{
       cartani.mod_strength(cartacac) // NI intenta cambiar stats de Cuerpo a Cuerpo
     }
     assertEquals(cartacac._current_strength, expected = 5)
-    cartaem.mod_strength(cartacac)
-    assertEquals(cartacac._current_strength, expected = 1)
+    interceptMessage[InvalidTypeModStrengthException]("Carta Aseido no puede ser afectada por Carta Niebla Impenetrable"){
+      cartani.mod_strength(cartaase) // NI intenta cambiar stats de Asedio
+    }
+    assertEquals(cartaase._current_strength, expected = 10)
     cartani.mod_strength(cartadis)
     assertEquals(cartadis._current_strength, expected = 1)
+
+    // Carta Lluvia Torrencial solo puede cambiar stats de carta Asedio
+    interceptMessage[InvalidTypeModStrengthException]("Carta Cuerpo a Cuerpo no puede ser afectada por Carta Lluvia Torrencial"){
+      cartalt.mod_strength(cartacac) // LT intenta cambiar stats de Cuerpo a Cuerpo
+    }
+    interceptMessage[InvalidTypeModStrengthException]("Carta Distancia no puede ser afectada por Carta Lluvia Torrencial"){
+      cartalt.mod_strength(cartadis) // LT intenta cambiar stats de Distancia
+    }
     cartalt.mod_strength(cartaase)
     assertEquals(cartaase._current_strength, expected = 1)
+
+    // Carta Escarcha Mordiente solo puede cambiar stats de carta Cuerpo a Cuerpo
+    interceptMessage[InvalidTypeModStrengthException]("Carta Asedio no puede ser afectada por Carta Escarcha Mordiente"){
+      cartaem.mod_strength(cartaase) // EM intenta cambiar stats de Asedio
+    }
+    interceptMessage[InvalidTypeModStrengthException]("Carta Distancia no puede ser afectada por Carta Escarcha Mordiente"){
+      cartaem.mod_strength(cartadis) // EM intenta cambiar stats de Distancia
+    }
+    cartaem.mod_strength(cartacac)
+    assertEquals(cartacac._current_strength, expected = 1)
+
     // Carta Clima Despejado restaura los valores de fuerza originales de las cartas
     cartacd.mod_strength(cartacac)
     assertEquals(cartacac._current_strength, expected = 5)

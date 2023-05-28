@@ -17,6 +17,7 @@ import java.util.Objects
  * @param _name     Nombre de una carta de unidad
  * @param _strength Valor de fuerza de dicha carta
  * @param _ability  Habilidad que puede o no tener la carta de unidad
+ * @param _current_strength Valor de fuerza actual de la carta
  */
 class CartaDistancia(_name: String,
                      _strength: Int,
@@ -40,16 +41,16 @@ class CartaDistancia(_name: String,
     }
   }
 
-  override def gmod_pow_strength_asedio(other: CartaAsedio/*other: CartaUnidad*/): Unit = {
-    throw new InvalidTypeModStrengthException("Carta de Distancia no puede modificar fuerza de carta de Asedio")
+  override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
+    throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por Carta de Asedio")
   }
 
-  override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo/*other: CartaUnidad*/): Unit = {
-    throw new InvalidTypeModStrengthException("Carta de Distancia no puede modificar fuerza de carta de Cuerpo a Cuerpo")
+  override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
+    throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por Carta de Cuerpo a Cuerpo")
   }
 
-  override def gmod_pow_strength_distancia(other: CartaDistancia/*other: CartaUnidad*/): Unit = {
-    power_modder(other,this)
+  override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
+    power_modder(other, this)
   }
   //#######################################################################
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {

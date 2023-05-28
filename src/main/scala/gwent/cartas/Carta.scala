@@ -35,7 +35,7 @@ trait Carta {
  */
 trait CartaUnidad extends Carta {
   // valor de fuerza de una carta de unidad
-  var _strength: Int
+  val _strength: Int
   // valor actual de la fuerza de una carta en el juego
   var _current_strength: Int
   // habilidad que puede o no tener una carta de unidad

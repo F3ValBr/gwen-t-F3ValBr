@@ -27,6 +27,10 @@ class JugadorP1Test extends FunSuite{
     assert(JugadorTu.isValidName())
     assert(!JugadorX.isValidName())
   }
+  test("Un jugador tiene una cantidad de gemas valida"){
+    assert(JugadorTu.isValidGems())
+    assert(!JugadorX.isValidGems())
+  }
   test("Dos jugadores pueden ser distintos") {
     assert(!JugadorTu.equals(JugadorYo))
     assertEquals(JugadorTu, JugadorTu)

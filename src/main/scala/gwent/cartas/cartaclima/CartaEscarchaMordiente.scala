@@ -25,10 +25,6 @@ class CartaEscarchaMordiente(_name: String)
     other.get_mod_strength_em(this)
   }
 
-  def get_mod_strength_cd(other: CartaClimaDespejado): Unit = {
-
-  }
-
   /// Documentacion heredada desde [[Equals]]
   override def canEqual(that: Any): Boolean = that.isInstanceOf[CartaEscarchaMordiente]
 

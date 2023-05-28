@@ -14,7 +14,7 @@ import cl.uchile.dcc.gwent.cartas.cartaclima.CartaClimaDespejado
  */
 
 abstract class AbstractCartaUnidad(override val _name: String,
-                                   var _strength: Int,
+                                   override val _strength: Int,
                                    override val _ability: Option[String])
   extends CartaUnidad {
 
@@ -46,13 +46,13 @@ abstract class AbstractCartaUnidad(override val _name: String,
   override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
     // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
     if (card_modifier._ability.get == rm) {
-      card_modified._strength += 1
+      card_modified._current_strength += 1
     }
     // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
     // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
     else if (card_modifier._ability.get == ve && card_modified._name == card_modifier._name) {
-      card_modified._strength *= 2
-      card_modifier._strength *= 2
+      card_modified._current_strength *= 2
+      card_modifier._current_strength *= 2
     }
   }
 

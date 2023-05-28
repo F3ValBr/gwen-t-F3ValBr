@@ -31,6 +31,10 @@ class JugadorCPUTest extends FunSuite {
     assert(JugadorPC.isValidName())
     assert(!JugadorY.isValidName())
   }
+  test("Un jugador tiene una cantidad de gemas valida"){
+    assert(JugadorPC.isValidGems())
+    assert(!JugadorMQ.isValidGems())
+  }
   test("Dos jugadores pueden ser distintos"){
     assert(!JugadorPC.equals(JugadorIA))
     assert(new JugadorCPU("Computador").equals(JugadorPC))

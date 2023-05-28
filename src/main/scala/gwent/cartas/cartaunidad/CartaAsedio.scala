@@ -17,6 +17,7 @@ import java.util.Objects
  * @param _name     Nombre de una carta de unidad
  * @param _strength Valor de fuerza de dicha carta
  * @param _ability  Habilidad que puede o no tener la carta de unidad
+ * @param _current_strength Valor de fuerza actual de la carta
  */
 class CartaAsedio(_name: String,
                   _strength: Int,
@@ -40,20 +41,19 @@ class CartaAsedio(_name: String,
   override def pow_strength_of(other: CartaUnidad): Unit = {
     if (this._ability.isDefined) {
       other.gmod_pow_strength_asedio(this)
-      //this.gmod_pow_strength_asedio(other)
     }
   }
 
-  override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo/*other: CartaUnidad*/): Unit = {
-    throw new InvalidTypeModStrengthException("Carta Asedio no puede modificar fuerza de Carta Cuerpo a Cuerpo")
+  override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
+    throw new InvalidTypeModStrengthException("Fuerza de Carta Asedio no puede ser modificada por de Carta Cuerpo a Cuerpo")
   }
 
-  override def gmod_pow_strength_distancia(other: CartaDistancia/*other: CartaUnidad*/): Unit = {
-    throw new InvalidTypeModStrengthException("Carta Asedio no puede modificar fuerza de Carta Distancia")
+  override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
+    throw new InvalidTypeModStrengthException("Fuerza de Carta Distancia no puede ser modificada por de Carta Cuerpo a Cuerpo")
   }
 
-  override def gmod_pow_strength_asedio(other: CartaAsedio/*other: CartaUnidad*/): Unit = {
-    power_modder(other,this)
+  override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
+    power_modder(other, this)
   }
   
   override def add_card_to(tablero_zona: ZonaCartasCombate): Unit = {

@@ -31,7 +31,7 @@ abstract class AbstractJugador(override val name: String,
   }
 
   override def isValidGems(): Boolean = {
-    if (gems >= 0 && gems <= 2) true
+    if (gems > 0 && gems <= 2) true
     else false
   }
   
