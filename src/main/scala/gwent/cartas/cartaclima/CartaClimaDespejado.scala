@@ -19,7 +19,8 @@ class CartaClimaDespejado(_name: String)
    * previo a ser afectado por una carta climatica de otro tipo
    */
   override def mod_strength(other: CartaUnidad): Unit = {
-    other._current_strength = other._strength
+    //other._current_strength = other._strength
+    other.give_back_strength()
   }
 
   /// Documentacion heredada desde [[Equals]]
@@ -29,7 +30,8 @@ class CartaClimaDespejado(_name: String)
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[CartaClimaDespejado]
-      _name == other._name
+      this.getname() == other.getname()
+      //_name == other._name
     } else {
       false
     }
@@ -37,6 +39,6 @@ class CartaClimaDespejado(_name: String)
 
   /// Documentacion heredada desde [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaClimaDespejado], _name)
+    Objects.hash(classOf[CartaClimaDespejado], getname())//_name)
   }
 }

@@ -26,14 +26,8 @@ import scala.collection.mutable.ListBuffer
  * @since 1.0
  * */
 trait Jugador {
-  protected val _name: String
-  protected var _gems: Int
-
   var decknum: Int
   var handnum: Int
-
-  protected var _deck_list: DeckClass
-  protected var _hand_list: ListBuffer[Carta]
 
   val name: String
   var gems: Int

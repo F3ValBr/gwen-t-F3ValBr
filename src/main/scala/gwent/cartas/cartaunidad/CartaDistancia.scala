@@ -34,8 +34,8 @@ class CartaDistancia(_name: String,
   }
 
   // se asigna la fuerza actual de la carta a su fuerza base
-  _current_strength = _strength
-  curr_strength = _current_strength
+  //_current_strength = _strength
+  //curr_strength = _current_strength
 
   // se asigna la habilidad protegida de la carta a un getter
   ability = _ability
@@ -87,7 +87,8 @@ class CartaDistancia(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede con la modificacion seteando en 1
   override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
-    this._current_strength = 1
+    //this._current_strength = 1
+    this.set_strength_to_num(1)
   }
 
   //#######################################################################
@@ -99,7 +100,8 @@ class CartaDistancia(_name: String,
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[CartaDistancia]
-      _name == other._name
+      this.getname() == other.getname()
+      //_name == other._name
     } else {
       false
     }
@@ -107,6 +109,6 @@ class CartaDistancia(_name: String,
 
   /// Documentacion heredada desde [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaDistancia], _name)
+    Objects.hash(classOf[CartaDistancia], getname())//_name)
   }
 }

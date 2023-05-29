@@ -13,7 +13,7 @@ import javax.print.attribute.standard.MediaSize.Other
  *
  * Una carta tiene un parametro que lo define a modo general
  * @constructor Crea una carta con un nombre definido
- * @param _name nombre de una carta
+ * @param name nombre de una carta
  *
  * @author Felipe Valdebenito Bravo
  * @version 1.0
@@ -21,7 +21,7 @@ import javax.print.attribute.standard.MediaSize.Other
  */
 trait Carta {
   // nombre de una carta
-  protected val _name: String
+  //protected val _name: String
   var name: String
 
   /** getname devuelve el nombre de una carta
@@ -36,20 +36,12 @@ trait Carta {
  * @constructor CartaUnidad, ademas de tener un nombre, tiene un valor de fuerza
  *              en nro entero y opcionalmente puede tener una habilidad o no.
  *              Tiene un metodo donde una carta aumenta la fuerza de otra CartaUnidad
- * @param _strength valor de fuerza de una carta de unidad
- * @param _current_strength valor actual de la fuerza de una carta en el juego
- * @param _ability habilidad que puede o no tener una carta de unidad
+ * @param current_strength valor actual de la fuerza de una carta en el juego
+ * @param ability habilidad que puede o no tener una carta de unidad
  */
 trait CartaUnidad extends Carta {
-  // valor de fuerza de una carta de unidad
-  val _strength: Int
-
-  // valor actual de la fuerza de una carta en el juego
-  var _current_strength: Int
+  // valor de fuerza de una carta de unidad en el juego
   var curr_strength: Int
-
-  // habilidad que puede o no tener una carta de unidad
-  protected val _ability: Option[String]
 
   // habilidad que puede o no tener una carta de unidad
   var ability: Option[String]
@@ -136,6 +128,29 @@ trait CartaUnidad extends Carta {
    * @param other carta de clima Despejado
    */
   def get_mod_strength_cd(other: CartaClimaDespejado): Unit
+
+  // Definicion de setters
+  /** setcurrentstrength modifica el valor de fuerza de una carta de unidad
+   */
+  def give_back_strength(): Unit
+
+  /** setcurrentstrength modifica el valor de fuerza de una carta de unidad
+   *
+   * @param num valor a sumar al valor de fuerza de una carta de unidad
+   */
+  def sum_to_strength(num: Int): Unit
+
+  /** setcurrentstrength modifica el valor de fuerza de una carta de unidad
+   *
+   * @param x valor a multiplicar al valor de fuerza de una carta de unidad
+   */
+  def strength_x_times(x: Int): Unit
+
+  /** setcurrentstrength modifica el valor de fuerza de una carta de unidad
+   *
+   * @param num valor a asignar al valor de fuerza de una carta de unidad
+   */
+  def set_strength_to_num(num: Int): Unit
 }
 
 /** Un trait donde una carta tiene una clasificacion CartaClima

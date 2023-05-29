@@ -13,17 +13,17 @@ import gwent.cartas.cartaclima.CartaClimaDespejado
  * @param _ability Habilidad que puede o no tener la carta de unidad
  */
 
-abstract class AbstractCartaUnidad(override val _name: String,
-                                   override val _strength: Int,
-                                   override val _ability: Option[String])
+abstract class AbstractCartaUnidad(private val _name: String,
+                                   private val _strength: Int,
+                                   private val _ability: Option[String])
   extends CartaUnidad {
 
-  var _current_strength: Int = _strength
+  // Valores privados de la clase
+  private var _current_strength: Int = _strength
 
+  // Valores visibles desde fuera de la clase
   var curr_strength: Int = _current_strength
-
   var ability: Option[String] = _ability
-
   var name: String = _name
 
   // los siguientes valores son para simplificar la evaluacion de algunos metodos en cada carta
@@ -59,18 +59,37 @@ abstract class AbstractCartaUnidad(override val _name: String,
   override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
     // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
     if (card_modifier.getability().get == rm) {
-      card_modified._current_strength += 1
+      //card_modified._current_strength += 1
+      card_modified.sum_to_strength(1)
     }
     // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
     // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
     else if (card_modifier.getability().get == ve && card_modified.getname() == card_modifier.getname()) {
-      card_modified._current_strength *= 2
-      card_modifier._current_strength *= 2
+      //card_modified._current_strength *= 2
+      card_modified.strength_x_times(2)
+      //card_modifier._current_strength *= 2
+      card_modifier.strength_x_times(2)
     }
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def get_mod_strength_cd(other: CartaClimaDespejado): Unit = {
     this._current_strength = this._strength
+  }
+
+  override def give_back_strength(): Unit = {
+    this._current_strength = this._strength
+  }
+
+  override def sum_to_strength(num: Int): Unit = {
+    this._current_strength += num
+  }
+
+  override def strength_x_times(x: Int): Unit = {
+    this._current_strength *= x
+  }
+
+  override def set_strength_to_num(num: Int): Unit = {
+    this._current_strength = num
   }
 }

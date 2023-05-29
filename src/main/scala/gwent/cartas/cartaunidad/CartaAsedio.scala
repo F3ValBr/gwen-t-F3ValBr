@@ -35,8 +35,8 @@ class CartaAsedio(_name: String,
   }
 
   // se asigna la fuerza actual de la carta a su fuerza base
-  _current_strength = _strength
-  curr_strength = _current_strength
+  //_current_strength = _strength
+  //curr_strength = _current_strength
 
 
   // se asigna la habilidad protegida de la carta a un getter
@@ -83,7 +83,8 @@ class CartaAsedio(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede con la modificacion al corresponder los tipos
   override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
-    this._current_strength = 1
+    //this._current_strength = 1
+    this.set_strength_to_num(1)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
@@ -101,7 +102,8 @@ class CartaAsedio(_name: String,
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[CartaAsedio]
-      _name == other._name
+      this.getname() == other.getname()
+      //_name == other._name
     } else {
       false
     }
@@ -109,6 +111,6 @@ class CartaAsedio(_name: String,
 
   /// Documentacion heredada desde [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaAsedio], _name)
+    Objects.hash(classOf[CartaAsedio], getname())//_name)
   }
 }

@@ -17,12 +17,12 @@ import scala.collection.mutable.ListBuffer
  * @param _deck_list lista de cartas del mazo
  * @param _hand_list lista de cartas en la mano
  */
-abstract class AbstractJugador(override val _name: String,
-                               var _gems: Int,
+abstract class AbstractJugador(private val _name: String,
+                               private var _gems: Int,
                                var decknum: Int,
                                var handnum: Int,
-                               var _deck_list: DeckClass,
-                               var _hand_list: ListBuffer[Carta])
+                               private var _deck_list: DeckClass,
+                               private var _hand_list: ListBuffer[Carta])
   extends Jugador {
 
   // Se asignan nombre y gemas protegidas a las variables publicas

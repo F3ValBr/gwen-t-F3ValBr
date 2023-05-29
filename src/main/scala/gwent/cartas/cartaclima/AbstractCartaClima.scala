@@ -9,7 +9,7 @@ import gwent.cartas.{CartaClima, CartaUnidad}
  * @param _name Nombre de la carta de clima
  */
 
-abstract class AbstractCartaClima(override val _name: String)
+abstract class AbstractCartaClima(private val _name: String)
   extends CartaClima {
 
   var name: String = _name

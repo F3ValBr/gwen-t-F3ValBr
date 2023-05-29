@@ -30,9 +30,12 @@ abstract class AbstractZonaCombateJugador(var cartas_zona_in: ListBuffer[CartaUn
   override def counter_strength(): Int = {
     var total_strength: Int = 0
     for (card <- cartas_zona_in) {
-      if (card._current_strength > 0) {
-        total_strength += card._current_strength
+      if (card.getcurrentstrength() > 0){
+        total_strength += card.getcurrentstrength()
       }
+      //if (card._current_strength > 0) {
+      //  total_strength += card._current_strength
+      //}
     }
     total_strength
   }

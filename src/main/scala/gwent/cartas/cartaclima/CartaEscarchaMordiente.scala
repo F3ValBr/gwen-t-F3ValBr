@@ -32,7 +32,8 @@ class CartaEscarchaMordiente(_name: String)
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[CartaEscarchaMordiente]
-      _name == other._name
+      this.getname() == other.getname()
+      //_name == other._name
     } else {
       false
     }
@@ -40,6 +41,6 @@ class CartaEscarchaMordiente(_name: String)
 
   /// Documentacion heredada desde [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaEscarchaMordiente], _name)
+    Objects.hash(classOf[CartaEscarchaMordiente], getname())//_name)
   }
 }

@@ -35,8 +35,8 @@ class CartaCuerpoACuerpo(_name: String,
   }
 
   // se asigna la fuerza actual de la carta a su fuerza base
-  _current_strength = _strength
-  curr_strength = _current_strength
+  //_current_strength = _strength
+  //curr_strength = _current_strength
 
   // se asigna la habilidad protegida de la carta a un getter
   ability = _ability
@@ -70,7 +70,8 @@ class CartaCuerpoACuerpo(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // Se procede a modificar la fuerza de la carta cuerpo a cuerpo
   override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
-    this._current_strength = 1
+    //this._current_strength = 1
+    this.set_strength_to_num(1)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
@@ -100,7 +101,8 @@ class CartaCuerpoACuerpo(_name: String,
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[CartaCuerpoACuerpo]
-      _name == other._name
+      this.getname() == other.getname()
+      //_name == other._name
     } else {
       false
     }
@@ -108,7 +110,7 @@ class CartaCuerpoACuerpo(_name: String,
 
   /// Documentacion heredada desde [[Any]]
   override def hashCode: Int = {
-    Objects.hash(classOf[CartaCuerpoACuerpo], _name)
+    Objects.hash(classOf[CartaCuerpoACuerpo], getname())//_name)
   }
 
 }

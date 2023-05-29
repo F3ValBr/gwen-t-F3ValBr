@@ -50,7 +50,7 @@ class CartaUnidadTest extends FunSuite{
   }
   test("Una carta de unidad tiene un valor de fuerza, el cual puede ser distinto al de otras cartas"){
     assertEquals(cartaase.getcurrentstrength(), expected = 10)
-    assert(!cartadis.getcurrentstrength().equals(cartacac._strength))
+    assert(!cartadis.getcurrentstrength().equals(cartacac.getcurrentstrength()))
   }
   test("Hay cartas con habilidad definida como hay cartas sin habilidad"){
     assertEquals(cartaase.getability(), expected = None)
@@ -123,12 +123,12 @@ class CartaUnidadTest extends FunSuite{
     interceptMessage[InvalidTypeModStrengthException]("Fuerza de Carta Distancia no puede ser modificada por Carta Cuerpo a Cuerpo") {
       cartadis.pow_strength_of(cartaase)
     }
-    assertEquals(cartacac._current_strength, expected = 5)
-    assertEquals(cartaase._current_strength, expected = 10)
+    assertEquals(cartacac.getcurrentstrength(), expected = 5)
+    assertEquals(cartaase.getcurrentstrength(), expected = 10)
     val cartadis2 = new CartaDistancia("Distancia 2", 4)
     cartadis.pow_strength_of(cartadis2)
-    assertEquals(cartadis2._current_strength, expected = 5)
+    assertEquals(cartadis2.getcurrentstrength(), expected = 5)
     cartadis2.pow_strength_of(cartadis)
-    assertEquals(cartadis._current_strength, expected = 3)
+    assertEquals(cartadis.getcurrentstrength(), expected = 3)
   }
 }
