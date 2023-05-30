@@ -53,17 +53,17 @@ trait ZonaCartasCombate extends Tablero {
   /** add_card_asedio agrega una carta a la zona de asedio
    * @param card carta a agregar
    */
-  def add_card_asedio(card: CartaUnidad): Unit
+  def add_card_asedio(card: CartaAsedio): Unit
 
   /** add_card_cuerpo_a_cuerpo agrega una carta a la zona de cuerpo a cuerpo
    * @param card carta a agregar
    */
-  def add_card_cuerpo_a_cuerpo(card: CartaUnidad): Unit
+  def add_card_cuerpo_a_cuerpo(card: CartaCuerpoACuerpo): Unit
 
   /** add_card_distancia agrega una carta a la zona de distancia
    * @param card carta a agregar
    */
-  def add_card_distancia(card: CartaUnidad): Unit
+  def add_card_distancia(card: CartaDistancia): Unit
 
   /** card_adder es el metodo auxiliar para añadir una carta a una lista dada
    * @param list_of_cards lista de cartas a la que se le agregara la carta
