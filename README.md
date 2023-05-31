@@ -12,5 +12,6 @@ This project's goal is to create a (simplified) clone of the
 [_Gwent_](https://www.playgwent.com/en)card game developed by [_CD PROJEKT RED_](https://cdprojektred.com/en/)
 
 ---
+![UML para Gwent - Felipe Valdebenito](gwen-t-F3ValBr/READMEfiles/UML_Gwent_Felipe_Valdebenito-2.jpg)
 
-**The rest of the documentation is left for the users of this template to complete**
+**The rest of the documentation is left for the users of this template to complete**x
