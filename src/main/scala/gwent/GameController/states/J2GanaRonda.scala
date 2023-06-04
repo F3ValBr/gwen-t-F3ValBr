@@ -8,7 +8,7 @@ class J2GanaRonda(context: GameController) extends GameState(context) {
     context.state = new InicioRonda(context)
   }
   
-  override toJ2GanaJuego(): Unit = {
+  override def toJ2GanaJuego(): Unit = {
     context.state = new J2GanaJuego(context)
   }
 }

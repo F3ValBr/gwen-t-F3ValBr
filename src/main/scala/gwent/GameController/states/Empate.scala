@@ -8,11 +8,11 @@ class Empate(context: GameController) extends GameState(context) {
     context.state = new SiguienteRonda(context)
   }
 
-  override def J1GanaJuego(): Unit = {
+  override def toJ1GanaJuego(): Unit = {
     context.state = new J1GanaJuego(context)
   }
 
-  override def J2GanaJuego(): Unit = {
+  override def toJ2GanaJuego(): Unit = {
     context.state = new J2GanaJuego(context)
   }
 }

@@ -9,10 +9,10 @@ class SelectCarta(context: GameController) extends GameState(context) {
   }
 
   override def toTurnoJ1(): Unit = {
-    context.state(new TurnoJ1(context))
+    context.state = new TurnoJ1(context)
   }
-  
+
   override def toTurnoJ2(): Unit = {
-    context.state(new TurnoJ2(context))
+    context.state = new TurnoJ2(context)
   }
 }
