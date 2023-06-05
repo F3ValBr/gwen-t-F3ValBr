@@ -4,6 +4,7 @@ package gwent.GameController.states
 import gwent.GameController.{GameController, GameState}
 
 class Empate(context: GameController) extends GameState(context) {
+  override def isEmpate(): Boolean = true
   override def toSiguienteRonda(): Unit = {
     context.state = new SiguienteRonda(context)
   }

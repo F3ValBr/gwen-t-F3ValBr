@@ -6,6 +6,8 @@ import gwent.Exceptions.InvalidTransitionException
 class GameState(val context: GameController) {
   context.state = this
 
+  var pasoTurno = false
+
   private def transitionError(targetState: String): Unit = {
     throw new InvalidTransitionException(s"No se puede transicionar de ${getClass.getSimpleName} a $targetState")
   }
@@ -13,7 +15,9 @@ class GameState(val context: GameController) {
   def toInicioRonda(): Unit = transitionError("InicioRonda")
   def toTurnoJ1(): Unit = transitionError("TurnoJ1")
   def toTurnoJ2(): Unit = transitionError("TurnoJ2")
+  def pasarTurno(): Unit = transitionError("PasarTurno")
   def toSelectCarta(): Unit = transitionError("SelectCarta")
+  def jugarCarta(): Unit = transitionError("JugarCarta")
   def toFinRonda(): Unit = transitionError("FinRonda")
   def toConteoFinalStrength(): Unit = transitionError("ConteoFinalStrength")
   def toJ1GanaRonda(): Unit = transitionError("J1GanaRonda")
@@ -24,4 +28,18 @@ class GameState(val context: GameController) {
   def toSiguienteRonda(): Unit = transitionError("SiguienteRonda")
   def toFinJuego(): Unit = transitionError("FinJuego")
 
+
+  def isTurnoJ1(): Boolean = false
+  def isTurnoJ2(): Boolean = false
+
+  def pasoTurnoJ1(): Boolean = false
+  def pasoTurnoJ2(): Boolean = false
+  def ganoRondaJ1(): Boolean = false
+  def ganoRondaJ2(): Boolean = false
+  def isEmpate(): Boolean = false
+  def ganoJuegoJ1(): Boolean = false
+  def ganoJuegoJ2(): Boolean = false
+  def isFinJuego(): Boolean = false
+  def tieneGemasJ1(): Boolean = false
+  def tieneGemasJ2(): Boolean = false
 }
