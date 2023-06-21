@@ -56,7 +56,7 @@ trait CartaUnidad extends Carta {
 
   /** getability devuelve la habilidad de una carta de unidad
    *
-   * @return habilidad de una carta de unidad
+   * @return habilidad en String de una carta de unidad
    */
   def getability(): String
 
@@ -89,15 +89,6 @@ trait CartaUnidad extends Carta {
    * @param other carta de cuerpo a cuerpo que aumenta su valor de fuerza
    */
   def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit
-
-  /** Un metodo que permite modificar la fuerza de otra carta de unidad, dada una carta que tenga ability
-   *
-   * Modifica la fuerza de una carta de unidad, con la condiciones que se detallan en el metodo
-   *
-   * @param card_modifier Una carta de unidad que se encargara de modificar la fuerza de la carta de unidad
-   * @param card_modified Una carta de unidad que sera modificada por la carta de unidad anterior
-   */
-  protected def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit
 
   /** add_card_to agrega la carta a la zona del tablero correspondiente
    *

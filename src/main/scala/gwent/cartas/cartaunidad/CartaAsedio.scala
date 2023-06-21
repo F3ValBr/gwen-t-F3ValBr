@@ -35,11 +35,6 @@ class CartaAsedio(_name: String,
     this(_name, _strength, EfectoNulo())
   }
 
-  // se asigna la fuerza actual de la carta a su fuerza base
-  //_current_strength = _strength
-  //curr_strength = _current_strength
-
-
   // se asigna la habilidad protegida de la carta a un getter
   ability = _ability
 
@@ -65,7 +60,6 @@ class CartaAsedio(_name: String,
   // se procede con la modificacion al corresponder los tipos
   override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
     other.ability(other, this)
-    //power_modder(other, this)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]

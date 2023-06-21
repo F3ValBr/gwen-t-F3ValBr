@@ -35,10 +35,6 @@ class CartaCuerpoACuerpo(_name: String,
     this(_name, _strength, EfectoNulo())
   }
 
-  // se asigna la fuerza actual de la carta a su fuerza base
-  //_current_strength = _strength
-  //curr_strength = _current_strength
-
   // se asigna la habilidad protegida de la carta a un getter
   ability = _ability
 
@@ -64,13 +60,11 @@ class CartaCuerpoACuerpo(_name: String,
   // se procede a modificar la fuerza de la carta cuerpo a cuerpo
   override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
     other.ability(other, this)
-    //power_modder(other, this)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
   // Se procede a modificar la fuerza de la carta cuerpo a cuerpo
   override def get_mod_strength_em(other: CartaEscarchaMordiente): Unit = {
-    //this._current_strength = 1
     this.set_strength_to_num(1)
   }
 

@@ -27,15 +27,7 @@ abstract class AbstractCartaUnidad(private val _name: String,
   var curr_strength: Int = _current_strength
   var ability: Efecto = _ability
   var name: String = _name
-
-  // los siguientes valores son para simplificar la evaluacion de algunos metodos en cada carta
-  val rm = "Refuerzo Moral"
-  val ve = "Vinculo Estrecho"
-
-  val carddis = "CartaDistancia"
-  val cardcac = "CartaCuerpoACuerpo"
-  val cardase = "CartaAsedio"
-
+  
   override def getname(): String = {
     name = _name
     name
@@ -47,6 +39,7 @@ abstract class AbstractCartaUnidad(private val _name: String,
   }
 
   override def getability(): String = {
+    // Aqui use getClass solo para obtener el nombre y realizar los tests correspondientes
     ability.getClass.getSimpleName
   }
 
@@ -56,33 +49,6 @@ abstract class AbstractCartaUnidad(private val _name: String,
     // y si su nombre no es vacio
     _strength > 0 && _strength <= 15 && _name != ""
   }
-
-  /**
-  def apply(self: CartaUnidad, target: CartaUnidad): Unit = {
-    _ability(self, target)
-  }*/
-
-  override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
-    _ability(card_modified, card_modifier)
-  }
-  /**
-  // Documentacion heredada desde [[CartaUnidad]]
-  override def power_modder(card_modifier: CartaUnidad, card_modified: CartaUnidad): Unit = {
-    // si la habilidad de la carta es esfuerzo moral, la fuerza de la otra carta suma 1
-    if (card_modifier.getability() == rm) {
-      //card_modified._current_strength += 1
-      card_modified.sum_to_strength(1)
-    }
-    // si la habilidad de la carta es Vinculo Estrecho y ademas la carta que modifica tiene el
-    // mismo nombre que la carta a modificar, tanto a la carta propia como a la modificada se le duplica su fuerza
-    else if (card_modifier.getability() == ve && card_modified.getname() == card_modifier.getname()) {
-      //card_modified._current_strength *= 2
-      card_modified.strength_x_times(2)
-      //card_modifier._current_strength *= 2
-      card_modifier.strength_x_times(2)
-    }
-  }
-  */
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def get_mod_strength_cd(other: CartaClimaDespejado): Unit = {
