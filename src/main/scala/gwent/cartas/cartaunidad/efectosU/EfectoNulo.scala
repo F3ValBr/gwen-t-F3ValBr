@@ -2,11 +2,8 @@ package cl.uchile.dcc
 package gwent.cartas.cartaunidad.efectosU
 import gwent.cartas.CartaUnidad
 
-class VinculoEstrecho extends Efecto {
+class EfectoNulo extends Efecto {
   override def apply(self: CartaUnidad, target: CartaUnidad): Unit = {
-    if (self.getname() == target.getname()){
-      self.curr_strength *= 2
-      target.curr_strength *= 2
-    }
+    // No hace nada
   }
 }
