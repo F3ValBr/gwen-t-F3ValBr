@@ -57,7 +57,7 @@ class CartaCuerpoACuerpo(_name: String,
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
-  // se procede a modificar la fuerza de la carta cuerpo a cuerpo
+  // se procede la modificacion via Efecto
   override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
     other.ability(other, this)
   }

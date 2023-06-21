@@ -17,7 +17,6 @@ import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.Efecto
 abstract class AbstractCartaUnidad(private val _name: String,
                                    private val _strength: Int,
                                    private val _ability: Efecto)
-                                   //private val _ability: Option[String])
   extends CartaUnidad {
 
   // Valores privados de la clase
@@ -27,17 +26,20 @@ abstract class AbstractCartaUnidad(private val _name: String,
   var curr_strength: Int = _current_strength
   var ability: Efecto = _ability
   var name: String = _name
-  
+
+  // Documentacion heredada desde [[CartaUnidad]]
   override def getname(): String = {
     name = _name
     name
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
   override def getcurrentstrength(): Int = {
     curr_strength = _current_strength
     curr_strength
   }
 
+  // Documentacion heredada desde [[CartaUnidad]]
   override def getability(): String = {
     // Aqui use getClass solo para obtener el nombre y realizar los tests correspondientes
     ability.getClass.getSimpleName
@@ -52,7 +54,7 @@ abstract class AbstractCartaUnidad(private val _name: String,
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def get_mod_strength_cd(other: CartaClimaDespejado): Unit = {
-    this._current_strength = this._strength
+    this.give_back_strength()
   }
 
   override def give_back_strength(): Unit = {

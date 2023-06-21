@@ -22,7 +22,6 @@ import javax.print.attribute.standard.MediaSize.Other
  */
 trait Carta {
   // nombre de una carta
-  //protected val _name: String
   var name: String
 
   /** getname devuelve el nombre de una carta

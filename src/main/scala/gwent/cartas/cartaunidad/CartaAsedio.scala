@@ -57,7 +57,7 @@ class CartaAsedio(_name: String,
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
-  // se procede con la modificacion al corresponder los tipos
+  // se procede la modificacion via Efecto
   override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
     other.ability(other, this)
   }
@@ -77,7 +77,6 @@ class CartaAsedio(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede con la modificacion al corresponder los tipos
   override def get_mod_strength_lt(other: CartaLluviaTorrencial): Unit = {
-    //this._current_strength = 1
     this.set_strength_to_num(1)
   }
 

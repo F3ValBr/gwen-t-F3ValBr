@@ -56,7 +56,7 @@ class CartaDistancia(_name: String,
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
-  // se procede la modificacion via power_modder
+  // se procede la modificacion via Efecto
   override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
     other.ability(other, this)
   }
@@ -82,7 +82,6 @@ class CartaDistancia(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede con la modificacion seteando en 1
   override def get_mod_strength_ci(other: CartaNieblaImpenetrable): Unit = {
-    //this._current_strength = 1
     this.set_strength_to_num(1)
   }
 
