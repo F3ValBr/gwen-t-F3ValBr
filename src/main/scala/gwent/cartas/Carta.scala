@@ -4,8 +4,9 @@ package gwent.cartas
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
-
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.Efecto
 
 import javax.print.attribute.standard.MediaSize.Other
 
@@ -44,7 +45,7 @@ trait CartaUnidad extends Carta {
   var curr_strength: Int
 
   // habilidad que puede o no tener una carta de unidad
-  var ability: String
+  var ability: Efecto
 
   // Definicion de getters
   /** getstrength devuelve el valor de fuerza de una carta de unidad

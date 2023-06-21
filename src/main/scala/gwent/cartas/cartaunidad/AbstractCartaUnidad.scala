@@ -16,7 +16,7 @@ import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.Efecto
 
 abstract class AbstractCartaUnidad(private val _name: String,
                                    private val _strength: Int,
-                                   val _ability: Efecto)
+                                   private val _ability: Efecto)
                                    //private val _ability: Option[String])
   extends CartaUnidad {
 
@@ -25,7 +25,7 @@ abstract class AbstractCartaUnidad(private val _name: String,
 
   // Valores visibles desde fuera de la clase
   var curr_strength: Int = _current_strength
-  var ability: String = _ability.getClass.getSimpleName
+  var ability: Efecto = _ability
   var name: String = _name
 
   // los siguientes valores son para simplificar la evaluacion de algunos metodos en cada carta
@@ -47,7 +47,7 @@ abstract class AbstractCartaUnidad(private val _name: String,
   }
 
   override def getability(): String = {
-    ability
+    ability.getClass.getSimpleName
   }
 
   // Documentacion heredada desde [[CartaUnidad]]

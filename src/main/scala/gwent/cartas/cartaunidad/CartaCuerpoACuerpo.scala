@@ -40,7 +40,7 @@ class CartaCuerpoACuerpo(_name: String,
   //curr_strength = _current_strength
 
   // se asigna la habilidad protegida de la carta a un getter
-  ability = _ability.getClass.getSimpleName
+  ability = _ability
 
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede a añadir la carta via el metodo add_card_cuerpo_a_cuerpo
@@ -63,7 +63,7 @@ class CartaCuerpoACuerpo(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede a modificar la fuerza de la carta cuerpo a cuerpo
   override def gmod_pow_strength_cuerpoacuerpo(other: CartaCuerpoACuerpo): Unit = {
-    other._ability(other, this)
+    other.ability(other, this)
     //power_modder(other, this)
   }
 

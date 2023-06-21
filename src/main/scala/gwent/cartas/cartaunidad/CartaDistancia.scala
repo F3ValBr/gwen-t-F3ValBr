@@ -39,7 +39,7 @@ class CartaDistancia(_name: String,
   //curr_strength = _current_strength
 
   // se asigna la habilidad protegida de la carta a un getter
-  ability = _ability.getClass.getSimpleName
+  ability = _ability
 
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede a la modificacion si existe una habilidad, y se hace la modificacion via gmod_pow_strength_distancia
@@ -62,7 +62,7 @@ class CartaDistancia(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede la modificacion via power_modder
   override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
-    other._ability(other, this)
+    other.ability(other, this)
     //power_modder(other, this)
   }
 

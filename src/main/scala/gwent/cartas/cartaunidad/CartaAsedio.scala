@@ -41,7 +41,7 @@ class CartaAsedio(_name: String,
 
 
   // se asigna la habilidad protegida de la carta a un getter
-  ability = _ability.getClass.getSimpleName
+  ability = _ability
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def pow_strength_of(other: CartaUnidad): Unit = {
@@ -64,7 +64,7 @@ class CartaAsedio(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede con la modificacion al corresponder los tipos
   override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
-    other._ability(other, this)
+    other.ability(other, this)
     //power_modder(other, this)
   }
 
