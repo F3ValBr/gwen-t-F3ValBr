@@ -6,6 +6,7 @@ import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, Car
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 
 import cl.uchile.dcc.gwent.Exceptions.InvalidTypeModStrengthException
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.{RefuerzoMoral, VinculoEstrecho}
 import munit.FunSuite
 
 class CartaClimaTest extends FunSuite{
@@ -36,9 +37,9 @@ class CartaClimaTest extends FunSuite{
     cartani = new CartaNieblaImpenetrable("Neblina")
     cartaem = new CartaEscarchaMordiente("Frio Extremo")
 
-    cartacac = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 5, Some(ve))
+    cartacac = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 5, new VinculoEstrecho())
     cartaase = new CartaAsedio("Asedio 1", 10)
-    cartadis = new CartaDistancia("Distancia 1", 3, Some(rm))
+    cartadis = new CartaDistancia("Distancia 1", 3, new RefuerzoMoral())
   }
 
   test("Una carta de clima tiene un nombre definido, distinto de otras cartas"){

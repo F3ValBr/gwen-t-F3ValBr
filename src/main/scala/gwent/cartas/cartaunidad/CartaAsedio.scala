@@ -5,8 +5,9 @@ import gwent.cartas.CartaUnidad
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
 import gwent.Exceptions.InvalidTypeModStrengthException
-
 import gwent.cartas.cartaclima.{CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.{Efecto, EfectoNulo}
 
 import java.util.Objects
 
@@ -21,7 +22,7 @@ import java.util.Objects
  */
 class CartaAsedio(_name: String,
                   _strength: Int,
-                  _ability: Option[String])
+                  _ability: Efecto)
   extends AbstractCartaUnidad(_name, _strength, _ability) with Equals {
 
   /** Un constructor auxiliar que define la clase en caso de no darse el parametro de habilidad
@@ -31,7 +32,7 @@ class CartaAsedio(_name: String,
    * @param _strength Valor de fuerza de dicha carta
    */
   def this(_name: String, _strength: Int) = {
-    this(_name, _strength, None)
+    this(_name, _strength, EfectoNulo())
   }
 
   // se asigna la fuerza actual de la carta a su fuerza base
@@ -40,14 +41,12 @@ class CartaAsedio(_name: String,
 
 
   // se asigna la habilidad protegida de la carta a un getter
-  ability = _ability
+  ability = _ability.getClass.getSimpleName
 
   // Documentacion heredada desde [[CartaUnidad]]
   override def pow_strength_of(other: CartaUnidad): Unit = {
     // si la habilidad esta definida, se procede a modificar la fuerza de la carta
-    if (this._ability.isDefined) {
-      other.gmod_pow_strength_asedio(this)
-    }
+    other.gmod_pow_strength_asedio(this)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
@@ -65,7 +64,8 @@ class CartaAsedio(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede con la modificacion al corresponder los tipos
   override def gmod_pow_strength_asedio(other: CartaAsedio): Unit = {
-    power_modder(other, this)
+    other._ability(other, this)
+    //power_modder(other, this)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]

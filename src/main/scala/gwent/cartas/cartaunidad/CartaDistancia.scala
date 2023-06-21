@@ -5,8 +5,9 @@ import gwent.cartas.CartaUnidad
 import gwent.Exceptions.InvalidTypeModStrengthException
 import gwent.tablero.ZonaCartasCombate
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
-
 import gwent.cartas.cartaclima.{CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
+
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.{Efecto, EfectoNulo}
 
 import java.util.Objects
 
@@ -21,7 +22,7 @@ import java.util.Objects
  */
 class CartaDistancia(_name: String,
                      _strength: Int,
-                     _ability: Option[String])
+                     _ability: Efecto)
   extends AbstractCartaUnidad(_name, _strength, _ability) with Equals {
 
   /** Un constructor auxiliar que define la clase en caso de no darse el parametro de habilidad
@@ -30,7 +31,7 @@ class CartaDistancia(_name: String,
    * @param _strength Valor de fuerza de dicha carta
    */
   def this(_name: String, _strength: Int) = {
-    this(_name, _strength, None)
+    this(_name, _strength, EfectoNulo())
   }
 
   // se asigna la fuerza actual de la carta a su fuerza base
@@ -38,14 +39,12 @@ class CartaDistancia(_name: String,
   //curr_strength = _current_strength
 
   // se asigna la habilidad protegida de la carta a un getter
-  ability = _ability
+  ability = _ability.getClass.getSimpleName
 
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede a la modificacion si existe una habilidad, y se hace la modificacion via gmod_pow_strength_distancia
   override def pow_strength_of(other: CartaUnidad): Unit = {
-    if (this._ability.isDefined) {
-      other.gmod_pow_strength_distancia(this)
-    }
+    other.gmod_pow_strength_distancia(this)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]
@@ -63,7 +62,8 @@ class CartaDistancia(_name: String,
   // Documentacion heredada desde [[CartaUnidad]]
   // se procede la modificacion via power_modder
   override def gmod_pow_strength_distancia(other: CartaDistancia): Unit = {
-    power_modder(other, this)
+    other._ability(other, this)
+    //power_modder(other, this)
   }
 
   // Documentacion heredada desde [[CartaUnidad]]

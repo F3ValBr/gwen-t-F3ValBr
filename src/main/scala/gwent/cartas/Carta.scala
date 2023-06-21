@@ -44,7 +44,7 @@ trait CartaUnidad extends Carta {
   var curr_strength: Int
 
   // habilidad que puede o no tener una carta de unidad
-  var ability: Option[String]
+  var ability: String
 
   // Definicion de getters
   /** getstrength devuelve el valor de fuerza de una carta de unidad
@@ -57,7 +57,7 @@ trait CartaUnidad extends Carta {
    *
    * @return habilidad de una carta de unidad
    */
-  def getability(): Option[String]
+  def getability(): String
 
   /** pow_strength_of aumenta el valor de fuerza de una carta de unidad
    *

@@ -2,8 +2,9 @@ package cl.uchile.dcc
 package gwent.testtypes
 
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
-
 import gwent.Exceptions.InvalidTypeModStrengthException
+
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.{RefuerzoMoral, VinculoEstrecho}
 import munit.FunSuite
 
 class CartaUnidadTest extends FunSuite{
@@ -16,17 +17,18 @@ class CartaUnidadTest extends FunSuite{
   val cac = "Cuerpo a Cuerpo"
   val dis = "Distancia"
 
-  val rm = "Refuerzo Moral"
-  val ve = "Vinculo Estrecho"
+  val rm = "RefuerzoMoral"
+  val ve = "VinculoEstrecho"
+  val nu = "EfectoNulo"
 
   val namex = "Asedio 1"
   val strengthx = 10
 
   override def beforeEach(context: BeforeEach): Unit = {
-    cartacac = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 5, Some(ve))
+    cartacac = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 5, new VinculoEstrecho())
     cartaase = new CartaAsedio("Asedio 1", 10)
-    cartadis = new CartaDistancia("Distancia 1", 3, Some(rm))
-    cartaasex = new CartaAsedio("Asedio X",5,Some(rm))
+    cartadis = new CartaDistancia("Distancia 1", 3, new RefuerzoMoral())
+    cartaasex = new CartaAsedio("Asedio X",5,new RefuerzoMoral())
   }
 
   test("Se puede crear una carta de unidad con sus atributos"){
@@ -53,14 +55,14 @@ class CartaUnidadTest extends FunSuite{
     assert(!cartadis.getcurrentstrength().equals(cartacac.getcurrentstrength()))
   }
   test("Hay cartas con habilidad definida como hay cartas sin habilidad"){
-    assertEquals(cartaase.getability(), expected = None)
-    assertEquals(cartaasex.getability(), expected = Some(rm))
-    assertEquals(cartadis.getability(), expected = Some(rm))
+    assertEquals(cartaase.getability(), expected = nu)
+    assertEquals(cartaasex.getability(), expected = rm)
+    assertEquals(cartadis.getability(), expected = rm)
     assert(!cartadis.getability().equals(cartacac.getability()))
   }
   test("Las cartas con habilidad modifican la fuerza de otras cartas"){
-    val cartacac2 = new CartaCuerpoACuerpo("CAC 2", 4, Some(rm))
-    val cartacac1var = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 3, Some(ve))
+    val cartacac2 = new CartaCuerpoACuerpo("CAC 2", 4, new RefuerzoMoral())
+    val cartacac1var = new CartaCuerpoACuerpo("Cuerpo a Cuerpo 1", 3, new VinculoEstrecho())
 
     // una carta con Vinculo Estrecho duplica la fuerza de otra carta
     // si la carta tiene distinto nombre, no modifica nada
@@ -99,11 +101,15 @@ class CartaUnidadTest extends FunSuite{
     assertEquals(cartacac.getcurrentstrength(), expected = 10)
   }
   test("Una carta de asedio solo modifica a otras de su mismo tipo, siempre que tenga una habilidad definida"){
-    cartaase.pow_strength_of(cartadis)
-    cartaase.pow_strength_of(cartacac)
+    interceptMessage[InvalidTypeModStrengthException]("Fuerza de Carta Distancia no puede ser modificada por Carta de Asedio") {
+      cartaase.pow_strength_of(cartadis)
+    }
+    interceptMessage[InvalidTypeModStrengthException]("Fuerza de Carta Cuerpo a Cuerpo no puede ser modificada por Carta de Asedio") {
+      cartaase.pow_strength_of(cartacac)
+    }
     assertEquals(cartacac.getcurrentstrength(), expected = 5)
     assertEquals(cartadis.getcurrentstrength(), expected = 3)
-    val cartaase2 = new CartaAsedio("Asedio 2", 6, Some(rm))
+    val cartaase2 = new CartaAsedio("Asedio 2", 6, new RefuerzoMoral())
     cartaase.pow_strength_of(cartaase2)
     assertEquals(cartaase2.getcurrentstrength(), expected = 6)
     cartaase2.pow_strength_of(cartaase)

@@ -4,6 +4,8 @@ package gwent.cartas
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.{RefuerzoMoral, VinculoEstrecho}
+
 import java.util.Objects
 import scala.collection.mutable.ListBuffer
 
@@ -23,23 +25,23 @@ class DeckClass(var _deck: ListBuffer[Carta]) extends Deck with Equals {
   // constructor por defecto, crea un deck con todas las cartas
   def this() =
     this(ListBuffer(new CartaAsedio("1", 1),
-      new CartaAsedio("2", 2, Some("Refuerzo Moral")),
+      new CartaAsedio("2", 2, new RefuerzoMoral()),
       new CartaAsedio("3", 3),
-      new CartaAsedio("4", 4, Some("Vinculo Estrecho")),
+      new CartaAsedio("4", 4, new VinculoEstrecho()),
       new CartaAsedio("5", 5),
       new CartaAsedio("6", 6),
       new CartaCuerpoACuerpo("1", 1),
-      new CartaCuerpoACuerpo("2", 2, Some("Vinculo Estrecho")),
+      new CartaCuerpoACuerpo("2", 2, new VinculoEstrecho()),
       new CartaCuerpoACuerpo("3", 3),
-      new CartaCuerpoACuerpo("4", 4, Some("Vinculo Estrecho")),
+      new CartaCuerpoACuerpo("4", 4, new VinculoEstrecho()),
       new CartaCuerpoACuerpo("5", 5),
       new CartaCuerpoACuerpo("6", 6),
       new CartaDistancia("1", 1),
       new CartaDistancia("2", 2),
-      new CartaDistancia("3", 3, Some("Refuerzo Moral")),
+      new CartaDistancia("3", 3, new RefuerzoMoral()),
       new CartaDistancia("4", 4),
       new CartaDistancia("5", 5),
-      new CartaDistancia("6", 6, Some("Refuerzo Moral")),
+      new CartaDistancia("6", 6, new RefuerzoMoral()),
       new CartaEscarchaMordiente("1"),
       new CartaEscarchaMordiente("2"),
       new CartaNieblaImpenetrable("3"),
