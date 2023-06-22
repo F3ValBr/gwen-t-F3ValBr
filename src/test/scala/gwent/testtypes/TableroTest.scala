@@ -2,11 +2,12 @@ package cl.uchile.dcc
 package gwent.testtypes
 
 import gwent.tablero.subdivisiones_combate.{ZonaAsedio, ZonaCuerpoACuerpo, ZonaDistancia}
-
-import gwent.Exceptions.InvalidPosForCardException
+import gwent.Exceptions.{InvalidPosForCardException, InvalidTypeModStrengthException}
 import gwent.cartas.cartaclima.{CartaClimaDespejado, CartaEscarchaMordiente, CartaLluviaTorrencial, CartaNieblaImpenetrable}
 import gwent.cartas.cartaunidad.{CartaAsedio, CartaCuerpoACuerpo, CartaDistancia}
 import gwent.tablero.ZonaClima
+
+import cl.uchile.dcc.gwent.cartas.cartaunidad.efectosU.{RefuerzoMoral, VinculoEstrecho}
 
 class TableroTest extends munit.FunSuite{
   var zonadis: ZonaDistancia = _
@@ -178,5 +179,40 @@ class TableroTest extends munit.FunSuite{
     assertEquals(zonaclima.cartas_clima_in, card_em)
     zonaclima.clean_zone()
     assertEquals(zonaclima.cartas_clima_in, new CartaClimaDespejado("Init"))
+  }
+
+  test("Modificacion de fuerzas dado una carta con cierto efecto"){
+
+    val card_ase2 = new CartaAsedio("ase_1", 5, new VinculoEstrecho())
+    val card_ase3 = new CartaAsedio("ase_3", 3, new RefuerzoMoral())
+    zonaase.add_card(card_ase)
+    zonaase.mod_cards(card_ase2)
+    zonaase.add_card(card_ase2)
+    assertEquals(zonaase.counter_strength(), 24)
+    zonaase.mod_cards(card_ase3)
+    zonaase.add_card(card_ase3)
+    assertEquals(zonaase.counter_strength(), 29)
+
+    val card_cac2 = new CartaCuerpoACuerpo("cac_1", 5)
+    zonacac.add_card(card_cac)
+    zonacac.mod_cards(card_cac2)
+    zonacac.add_card(card_cac2)
+    assertEquals(zonacac.counter_strength(), 14)
+
+    val card_dis2 = new CartaDistancia("dis_1", 3, new RefuerzoMoral())
+    val card_disx = new CartaDistancia("dis_x", 7)
+    zonadis.add_card(card_dis)
+    zonadis.add_card(card_disx)
+    zonadis.mod_cards(card_dis2)
+    zonadis.add_card(card_dis2)
+    assertEquals(zonadis.counter_strength(),17)
+    val card_dis3 = new CartaDistancia("dis_3", 5, new VinculoEstrecho())
+    zonadis.mod_cards(card_dis3)
+    zonadis.add_card(card_dis3)
+    assertEquals(zonadis.counter_strength(), 22)
+
+    interceptMessage[InvalidTypeModStrengthException]("Fuerza de Carta Distancia no puede ser modificada por Carta de Asedio") {
+      zonadis.mod_cards(card_ase2)
+    }
   }
 }

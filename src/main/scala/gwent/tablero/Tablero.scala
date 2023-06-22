@@ -70,6 +70,8 @@ trait ZonaCartasCombate extends Tablero {
    * @param card carta a agregar
    */
   protected def card_adder(list_of_cards: ListBuffer[CartaUnidad], card: CartaUnidad): Unit
+  
+  def mod_cards(last_card: CartaUnidad): Unit
 }
 
 /** ZonaCartasClima es una zona del tablero de juego de Gwent
