@@ -70,8 +70,20 @@ trait ZonaCartasCombate extends Tablero {
    * @param card carta a agregar
    */
   protected def card_adder(list_of_cards: ListBuffer[CartaUnidad], card: CartaUnidad): Unit
-  
+
+  /**
+   * mod_cards es el metodo que modifica el valor de fuerza de cartas de unidad, dependiendo del
+   * efecto que tenga la ultima carta recibida
+   * @param last_card carta que hara el efecto sobre las demas
+   */
   def mod_cards(last_card: CartaUnidad): Unit
+
+  /**
+   * mod_n_add_card mezcla la funcionalidad de modificar mediante el efecto de una carta junto con añadir esa misma
+   * carta al juego. Primero la carta ejerce su efecto y luego es añadida al tablero
+   * @param card_to_add Carta a añadir
+   */
+  def mod_n_add_card(card_to_add: CartaUnidad): Unit
 }
 
 /** ZonaCartasClima es una zona del tablero de juego de Gwent

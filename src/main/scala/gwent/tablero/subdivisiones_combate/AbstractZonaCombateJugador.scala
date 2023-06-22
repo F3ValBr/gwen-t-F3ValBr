@@ -50,9 +50,16 @@ abstract class AbstractZonaCombateJugador(var cartas_zona_in: ListBuffer[CartaUn
     list_of_cards += card
   }
 
+  // Documentacion en el trait ZonaCartasCombate
   override def mod_cards(last_card: CartaUnidad): Unit = {
     for (card <- cartas_zona_in) {
       last_card.pow_strength_of(card)
     }
+  }
+
+  // Documentacion en el trait ZonaCartasCombate
+  override def mod_n_add_card(card_to_add: CartaUnidad): Unit = {
+    mod_cards(card_to_add)
+    add_card(card_to_add)
   }
 }
