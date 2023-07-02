@@ -22,5 +22,7 @@ class GameControllerTest extends FunSuite{
     assert(gameController.isTurnoJ1())
   }
 
-  test("testeo")
+  test("testeo"){
+    
+  }
 }
