@@ -3,6 +3,8 @@ package gwent.jugadores
 
 import gwent.cartas.{Carta, DeckClass}
 
+import cl.uchile.dcc.gwent.GameController.observer.{AbstractSubject, WinCondition}
+
 import scala.collection.mutable.ListBuffer
 
 /** Una clase abstracta AbstractJugador, extiende a Jugador
@@ -23,7 +25,7 @@ abstract class AbstractJugador(private val _name: String,
                                var handnum: Int,
                                private var _deck_list: DeckClass,
                                private var _hand_list: ListBuffer[Carta])
-  extends Jugador {
+  extends AbstractSubject[WinCondition] with Jugador {
 
   // Se asignan nombre y gemas protegidas a las variables publicas
   override val name: String = _name
@@ -73,6 +75,9 @@ abstract class AbstractJugador(private val _name: String,
   override def del_gems(): Unit = {
     if (_gems > 0) {
       _gems -= 1
+    }
+    if (_gems == 0) {
+      notifyObservers(new WinCondition("gemas"))
     }
   }
 

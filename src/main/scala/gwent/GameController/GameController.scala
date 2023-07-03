@@ -2,28 +2,35 @@ package cl.uchile.dcc
 package gwent.GameController
 
 import gwent.GameController.states.InicioRonda
+import gwent.GameController.observer.{Observer, Subject, WinCondition}
+import gwent.jugadores.{Jugador, JugadorCPU, JugadorP1}
 
-import cl.uchile.dcc.gwent.jugadores.{Jugador, JugadorCPU, JugadorP1}
-
-class GameController {
+class GameController extends Observer[WinCondition] {
   private var jugador1: JugadorP1 = _//Option[JugadorP1] = None
   private var jugador2: JugadorCPU = _//Option[JugadorCPU] = None
 
   var state: GameState = new InicioRonda(this)
 
-  def startGame(jugador_n: String, cpu_n: String = "CPU"): Unit = {
+  def startGame(jugador_n: String = "J1", cpu_n: String = "CPU"): Unit = {
     jugador1 = addJugador(jugador_n)
     jugador2 = addCPU(cpu_n)
+    
   }
 
   private def addJugador(name: String): JugadorP1 = {
     jugador1 = new JugadorP1(name)
+    jugador1.addObserver(this)
     jugador1
   }
 
   private def addCPU(name: String): JugadorCPU = {
     jugador2 = new JugadorCPU(name)
+    jugador2.addObserver(this)
     jugador2
+  }
+
+  override def update(subject: Subject[WinCondition], value: WinCondition): Unit = {
+    println(s"Jugador $subject ha ganado la ronda por ${value.name}")
   }
 
   def toInicioRonda(): Unit = state.toInicioRonda()

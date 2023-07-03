@@ -2,6 +2,8 @@ package cl.uchile.dcc
 package gwent.testtypes
 
 import gwent.GameController.GameController
+
+import cl.uchile.dcc.gwent.GameController.states.InicioRonda
 import munit.FunSuite
 
 class GameControllerTest extends FunSuite{
@@ -23,6 +25,8 @@ class GameControllerTest extends FunSuite{
   }
 
   test("testeo"){
+    val gameController = new GameController()
+    gameController.startGame()
     
   }
 }

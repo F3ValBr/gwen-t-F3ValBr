@@ -3,6 +3,7 @@ package gwent.jugadores
 
 import gwent.jugadores.AbstractJugador
 import gwent.cartas.{Carta, DeckClass}
+
 import java.util.Objects
 import scala.collection.mutable.ListBuffer
 
@@ -22,7 +23,8 @@ class JugadorCPU (_name: String,
                   handnum: Int = 0,
                   _deck_list: DeckClass = DeckClass(),
                   _hand_list: ListBuffer[Carta] = ListBuffer())
-  extends AbstractJugador(_name,_gems,decknum,handnum,_deck_list,_hand_list) with Equals {
+  extends AbstractJugador(_name,_gems,decknum,handnum,_deck_list,_hand_list) 
+    with Equals {
 
   // Definicion inicial de getters
   override val name: String = _name
