@@ -76,6 +76,7 @@ abstract class AbstractJugador(private val _name: String,
     if (_gems > 0) {
       _gems -= 1
     }
+    // Cuando las gemas llegan a 0, se notifica a los observadores
     if (_gems == 0) {
       notifyObservers(new WinCondition("gemas"))
     }

@@ -5,10 +5,14 @@ import gwent.GameController.{GameController, GameState}
 
 class J1GanaRonda(context: GameController) extends GameState(context) {
   override def ganoRondaJ1(): Boolean = true
-  override def toSiguienteRonda(): Unit = {
+  //override def toSiguienteRonda(): Unit = {
+  //  context.state = new InicioRonda(context)
+  //}
+
+  override def toInicioRonda(): Unit = {
     context.state = new InicioRonda(context)
   }
-
+  
   override def toJ1GanaJuego(): Unit = {
     context.state = new J1GanaJuego(context)
   }

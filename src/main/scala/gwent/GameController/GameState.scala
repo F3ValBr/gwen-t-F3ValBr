@@ -19,19 +19,16 @@ class GameState(val context: GameController) {
   def toSelectCarta(): Unit = transitionError("SelectCarta")
   def jugarCarta(): Unit = transitionError("JugarCarta")
   def toFinRonda(): Unit = transitionError("FinRonda")
-  def toConteoFinalStrength(): Unit = transitionError("ConteoFinalStrength")
   def toJ1GanaRonda(): Unit = transitionError("J1GanaRonda")
   def toJ2GanaRonda(): Unit = transitionError("J2GanaRonda")
   def toEmpate(): Unit = transitionError("Empate")
   def toJ1GanaJuego(): Unit = transitionError("J1GanaJuego")
   def toJ2GanaJuego(): Unit = transitionError("J2GanaJuego")
-  def toSiguienteRonda(): Unit = transitionError("SiguienteRonda")
   def toFinJuego(): Unit = transitionError("FinJuego")
 
 
   def isTurnoJ1(): Boolean = false
   def isTurnoJ2(): Boolean = false
-
   def pasoTurnoJ1(): Boolean = false
   def pasoTurnoJ2(): Boolean = false
   def ganoRondaJ1(): Boolean = false
@@ -40,6 +37,6 @@ class GameState(val context: GameController) {
   def ganoJuegoJ1(): Boolean = false
   def ganoJuegoJ2(): Boolean = false
   def isFinJuego(): Boolean = false
-  def tieneGemasJ1(): Boolean = false
-  def tieneGemasJ2(): Boolean = false
+  def tieneGemasJ1(): Boolean = true
+  def tieneGemasJ2(): Boolean = true
 }
