@@ -3,6 +3,10 @@ package gwent.GameController.states
 
 import gwent.GameController.{GameController, GameState}
 
+/**
+  * Estado que representa el turno del jugador 1
+  * @param context contexto del controlador del juego
+  */
 class TurnoJ1(context: GameController) extends GameState(context) {
   override def isTurnoJ1(): Boolean = true
 

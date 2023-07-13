@@ -58,6 +58,9 @@ class GameController extends Observer[WinCondition] {
    * Actualiza el estado del juego cuando un jugador queda sin cartas
    * @param subject Jugador que quedó sin cartas
    * @param value Condición de victoria
+   *
+   * Si el jugador 1 queda sin cartas, el jugador 2 gana el juego
+   * Si el jugador 2 queda sin cartas, el jugador 1 gana el juego
    */
   override def update(subject: Subject[WinCondition], value: WinCondition): Unit = {
     println(s"Jugador ${subject.getClass.getSimpleName} ha perdido el juego por quedar sin ${value.name}")
@@ -70,34 +73,117 @@ class GameController extends Observer[WinCondition] {
     }
   }
 
+  // Metodos para quitar gemas a los jugadores de acuerdo a quien gano la ronda
+  /**
+   * Método que quita una gema a J1
+   */
   def elim_gem_j1(): Unit = jugador1.del_gems()
+  /**
+   * Método que quita una gema a J2
+   */
   def elim_gem_j2(): Unit = jugador2.del_gems()
 
+  /**
+   * Metodo que cambia a estado InicioRonda
+   */
   def toInicioRonda(): Unit = state.toInicioRonda()
+  /**
+   * Metodo que cambia a estado TurnoJ1
+   */
   def toTurnoJ1(): Unit = state.toTurnoJ1()
+  /**
+   * Metodo que cambia a estado TurnoJ2
+   */
   def toTurnoJ2(): Unit = state.toTurnoJ2()
+  /**
+   * Metodo que cambia a estado PasarTurnoJ1 o PasarTurnoJ2 dependiendo de quien sea el turno
+   */
   def pasarTurno(): Unit = state.pasarTurno()
+  /**
+   * Metodo que cambia a estado SelectCarta
+   */
   def toSelectCarta(): Unit = state.toSelectCarta()
+  /**
+   * Metodo que cambia a estado JugarCarta
+   */
   def jugarCarta(): Unit = state.jugarCarta()
+  /**
+   * Metodo que cambia a estado FinRonda
+   */
   def toFinRonda(): Unit = state.toFinRonda()
+  /**
+   * Metodo que cambia a estado J1GanaRonda
+   */
   def toJ1GanaRonda(): Unit = state.toJ1GanaRonda()
+  /**
+   * Metodo que cambia a estado J2GanaRonda
+   */
   def toJ2GanaRonda(): Unit = state.toJ2GanaRonda()
+  /**
+   * Metodo que cambia a estado Empate
+   */
   def toEmpate(): Unit = state.toEmpate()
+  /**
+   * Metodo que cambia a estado J1GanaJuego
+   */
   def toJ1GanaJuego(): Unit = state.toJ1GanaJuego()
+  /**
+   * Metodo que cambia a estado J2GanaJuego
+   */
   def toJ2GanaJuego(): Unit = state.toJ2GanaJuego()
+  /**
+   * Metodo que cambia a estado FinJuego
+   */
   def toFinJuego(): Unit = state.toFinJuego()
 
-
+  
+  // Metodos para obtener el estado del juego
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a TurnoJ1
+   */
   def isTurnoJ1(): Boolean = state.isTurnoJ1()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a TurnoJ2
+   */
   def isTurnoJ2(): Boolean = state.isTurnoJ2()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a pasoTurnoJ1
+   */
   def pasoTurnoJ1(): Boolean = state.pasoTurnoJ1()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a pasoTurnoJ2
+   */
   def pasoTurnoJ2(): Boolean = state.pasoTurnoJ2()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a ganoRondaJ1
+   */
   def ganoRondaJ1(): Boolean = state.ganoRondaJ1()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a ganoRondaJ2
+   */
   def ganoRondaJ2(): Boolean = state.ganoRondaJ2()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a empate
+   */
   def isEmpate(): Boolean = state.isEmpate()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a ganoJuegoJ1
+   */
   def ganoJuegoJ1(): Boolean = state.ganoJuegoJ1()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a ganoJuegoJ2
+   */
   def ganoJuegoJ2(): Boolean = state.ganoJuegoJ2()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a finJuego
+   */
   def isFinJuego(): Boolean = state.isFinJuego()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a tieneGemasJ1
+   */
   def tieneGemasJ1(): Boolean = state.tieneGemasJ1()
+  /**
+   * Metodo que retorna el valor contenido en la variable state relacionada a tieneGemasJ2
+   */
   def tieneGemasJ2(): Boolean = state.tieneGemasJ2()
 }

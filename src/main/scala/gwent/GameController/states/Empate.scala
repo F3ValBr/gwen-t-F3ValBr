@@ -3,11 +3,12 @@ package gwent.GameController.states
 
 import gwent.GameController.{GameController, GameState}
 
+/**
+  * Estado que representa un empate entre los jugadores.
+  * @param context el controlador del juego.
+  */
 class Empate(context: GameController) extends GameState(context) {
   override def isEmpate(): Boolean = true
-  //override def toSiguienteRonda(): Unit = {
-  //  context.state = new SiguienteRonda(context)
-  //}
   
   override def toInicioRonda(): Unit = {
     context.state = new InicioRonda(context)
