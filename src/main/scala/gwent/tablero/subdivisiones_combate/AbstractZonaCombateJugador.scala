@@ -33,9 +33,6 @@ abstract class AbstractZonaCombateJugador(var cartas_zona_in: ListBuffer[CartaUn
       if (card.getcurrentstrength() > 0){
         total_strength += card.getcurrentstrength()
       }
-      //if (card._current_strength > 0) {
-      //  total_strength += card._current_strength
-      //}
     }
     total_strength
   }

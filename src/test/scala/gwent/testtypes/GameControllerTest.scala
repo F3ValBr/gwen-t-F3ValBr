@@ -67,8 +67,8 @@ class GameControllerTest extends FunSuite{
     gameController.toJ1GanaRonda()
     assert(gameController.ganoRondaJ1())
     assert(!gameController.ganoRondaJ2())
-    //gameController.toJ1GanaJuego()
     assert(gameController.ganoJuegoJ1())
+    assert(!gameController.ganoJuegoJ2())
     gameController.toFinJuego()
   }
 
@@ -98,5 +98,78 @@ class GameControllerTest extends FunSuite{
     assert(gameController.ganoJuegoJ2())
     gameController.toFinJuego()
     assert(gameController.isFinJuego())
+  }
+
+  test("Jugador2 gana la partida y se notifica al observer de ello") {
+    gameController.startGame()
+    gameController.toTurnoJ1()
+    gameController.toSelectCarta()
+    gameController.toTurnoJ2()
+    gameController.toSelectCarta()
+    gameController.toTurnoJ1()
+    gameController.toFinRonda()
+    gameController.toEmpate()
+    assert(gameController.isEmpate())
+    gameController.toInicioRonda()
+    gameController.toTurnoJ1()
+    gameController.toTurnoJ2()
+    gameController.pasarTurno()
+    gameController.toTurnoJ1()
+    gameController.toFinRonda()
+    gameController.toJ1GanaRonda()
+    assert(gameController.ganoJuegoJ1())
+    gameController.toFinJuego()
+    assert(gameController.isFinJuego())
+  }
+
+  test("Transiciones que llevan a error"){
+    gameController.startGame()
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a TurnoJ2") {
+      gameController.toTurnoJ2()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a J1GanaRonda") {
+      gameController.toJ1GanaRonda()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a J2GanaRonda") {
+      gameController.toJ2GanaRonda()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a Empate") {
+      gameController.toEmpate()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a FinRonda") {
+      gameController.toFinRonda()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a FinJuego") {
+      gameController.toFinJuego()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a J1GanaJuego") {
+      gameController.toJ1GanaJuego()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a J2GanaJuego") {
+      gameController.toJ2GanaJuego()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a SelectCarta") {
+      gameController.toSelectCarta()
+    }
+    interceptMessage[InvalidTransitionException]("No se puede transicionar de InicioRonda a TurnoJ2") {
+      gameController.toTurnoJ2()
+    }
+    assert(!gameController.isTurnoJ1())
+    gameController.toTurnoJ1()
+  }
+  test("Valores de verdad segun la transicion"){
+    gameController.startGame()
+    assert(!gameController.isTurnoJ1())
+    assert(!gameController.isTurnoJ2())
+    assert(!gameController.isEmpate())
+    assert(!gameController.isFinJuego())
+    assert(!gameController.ganoJuegoJ1())
+    assert(!gameController.ganoJuegoJ2())
+    assert(!gameController.ganoRondaJ1())
+    assert(!gameController.ganoRondaJ2())
+    assert(!gameController.pasoTurnoJ1())
+    assert(!gameController.pasoTurnoJ2())
+    assert(gameController.tieneGemasJ1())
+    assert(gameController.tieneGemasJ2())
   }
 }
