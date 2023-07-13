@@ -3,15 +3,29 @@ package gwent.GameController
 
 import gwent.Exceptions.InvalidTransitionException
 
+/**
+  * Clase abstracta que representa un estado del juego.
+  * Cada estado implementa los métodos que permiten transicionar a otros estados.
+  * Además, implementa métodos que permiten consultar el estado actual del juego.
+  *
+  * @param context Referencia al controlador del juego.
+  *  
+  * @constructor Crea un nuevo estado del juego.
+  */
 class GameState(val context: GameController) {
   context.state = this
 
   var pasoTurno = false
 
+  /**
+   * Medoto que crea una excepción cuando se intenta transicionar a un estado inválido.
+   * @param targetState Nombre del estado al que se intenta transicionar.
+   */
   private def transitionError(targetState: String): Unit = {
     throw new InvalidTransitionException(s"No se puede transicionar de ${getClass.getSimpleName} a $targetState")
   }
 
+  // A continuación se definen los métodos que permiten transicionar a otros estados.
   def toInicioRonda(): Unit = transitionError("InicioRonda")
   def toTurnoJ1(): Unit = transitionError("TurnoJ1")
   def toTurnoJ2(): Unit = transitionError("TurnoJ2")
@@ -26,7 +40,7 @@ class GameState(val context: GameController) {
   def toJ2GanaJuego(): Unit = transitionError("J2GanaJuego")
   def toFinJuego(): Unit = transitionError("FinJuego")
 
-
+  // A continuación se definen los métodos que permiten consultar el estado actual del juego.
   def isTurnoJ1(): Boolean = false
   def isTurnoJ2(): Boolean = false
   def pasoTurnoJ1(): Boolean = false
